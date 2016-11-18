@@ -6,7 +6,7 @@ package production;
  *
  */
  
-public class Regularship extends Orders {
+public class Regularship extends Order{
 
 	public Regularship(String progress, String address, String dateReceived, int orderNumber) {
 		super(progress, address, dateReceived, orderNumber);
