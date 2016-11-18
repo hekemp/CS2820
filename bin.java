@@ -1,7 +1,10 @@
 package production;
 /**
-*credited to prof Ted Herman
-/
+ * 
+ * @author Prof Ted Herman
+ *
+ */
+
 
 
 public class Bin {
