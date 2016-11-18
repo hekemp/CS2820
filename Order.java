@@ -14,7 +14,7 @@ public class Order {
 	int orderNumber;
 	orderitems = items;
 	HashMap<String, Integer> Item;
-	public Orders(String progress,String address, String dateReceived,int orderNumber, OrderItem[] items){
+	public Order(String progress,String address, String dateReceived,int orderNumber, OrderItem[] items){
 		progress=progress;
 		address=address;
 		dateReceived=dateReceived;
