@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
 * There can be multiple robots in use at the same time. 
 */
 
-public class Robot implements Event, robotPath{
+public class Robot implements Event{
 	
 	private int robotId;
 	private int robotCharge;
