@@ -1,5 +1,8 @@
 package production;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -10,12 +13,13 @@ import java.util.PriorityQueue;
 */
 
 public class Robot implements Event{
+
 	
 	private int robotId;
 	private int robotCharge;
 	private boolean shelf = false;
 	public boolean usable = true;
-	private Point location;
+        private Point location;
 	private int xCord;
 	private int yCord;
 	private PriorityQueue<Event> robotEvents;
@@ -40,7 +44,7 @@ public class Robot implements Event{
 	*/
 	public void move(int x, int y){
 		/*
-		 * needs to check to see if space given is occupied
+		 * Do I need to check to see if space given is occupied?
 		 * also need to check if shelf is true or false...this
 		 * determines if we are moving a shelf or not
 		 */
@@ -49,18 +53,23 @@ public class Robot implements Event{
 		System.out.println( "Robot: " + robotId + " has moved: " + xCord + yCord);
 		
 	}
+        
+        
 	
 	/**
 	* @author Rachel Schneberger
-	* @param usable a boolean that tells the floor if a robot is usable or not
-	* @param robot charge an int that keeps track of a robots charge and will decrease when
+	* @param roboId - number to identify which robot (in our case, only one)
+	* @param charge - number of current robot charge. 
+        * Probably not necessary 
 	* robot is being used and when robot is being charged.
 	*/
-	public void restAndCharge(){
+	public void restAndCharge(int roboId, int charge){
 		//robots cannot be used while charging
-		// charge increases by one every clock tick...
-		usable = false;
-		while (robotCharge < 30){
+		// charge increases by one....eventually. 
+                //called as an event....when?
+                robotCharge = charge;
+                usable = false;
+		while (robotCharge < 50){
 			robotCharge = robotCharge +1;
 		}
 		usable = true;
@@ -69,49 +78,58 @@ public class Robot implements Event{
 	/**
 	* @author Rachel Schneberger
 	*/
-	public void chargeUsage(){
+	public void checkCharge(){
 		//when a robot is usable = true
 		//charge needs to decrease by one every clock tick
 		if (robotCharge == 20){
-			//head back to charging station
+                    move(1,1);//change x and y to actual charging station point
+			//should probably be get route instead. 
 		}
+		
 		if (robotCharge == 0){
-			usable = false;
+                    usable = false;
 		}
 		else{
-			usable = true;
+                    usable = true;
 		}
 	}
-	
-      public Point getLocation() {
-      	       return this.location.getLocation();
-      }
 	
 	/**
 	* @author Rachel Schneberger
 	*/
 	public void pickShelf(){
-		//wait one clock tick before picking up and moving
+		//wait one clock tick before picking up and moving....we are not implementing tick..
 		shelf = true;
 	}
 	
 	@Override
 	public void performAction(String Method) {
-		if(Method == "move,1,1"){
-			this.move(5,5);
-		}
-		else{
-			this.move(1,1);
-		}
+                String[] action = Method.split(",");
+                List<String> doAction = new ArrayList<String>(Arrays.asList(action));
+                int x = Integer.valueOf(doAction.get(1));
+                int y = Integer.valueOf(doAction.get(2));
+                if(doAction.get(0) == "move"){
+                    this.move(x,y);
+                }
+                if(doAction.get(0)== "restAndCharge"){
+                    this.restAndCharge(x,y);
+                }
+                if(doAction.get(0) == "checkCharge"){
+                    this.move(x, y);
+                    // replace x and y with specific location of charger
+                }
+                if(doAction.get(0) == "pickShelf"){
+                    pickShelf();
+                }
 	}
 	
 	@Override
 	public Event getEvent() {
 		if(robotEvents.isEmpty()){
-			return(Event) new Robot(1,1,1,100);
+                    return(Event) new Robot(1,1,1,100);
 		}
 		else{
-			return robotEvents.remove();
+                    return robotEvents.remove();
 		}
 	}
 
