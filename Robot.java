@@ -120,9 +120,4 @@ public class Robot implements Event, robotPath{
 		}
 	}
 	
-	@Override
-	public Point[] getRoute(Point p1, Point p2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
