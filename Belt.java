@@ -45,6 +45,7 @@ public class Belt implements Event{
     boolean ismoving(){
     	moving = true;
     	System.out.println( "Belt is moving");
+	return moving;
     }
     	
    
