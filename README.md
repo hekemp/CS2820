@@ -8,13 +8,13 @@ Event: hekemp
 
 Belt: melkeurti
 
-Floor: Qiansan (Xinyu Qian) the method return a path from point A to B is available (for Robot)
+Floor: Qiansan (Xinyu Qian)
 
 Inventory:yunfjiang
 
 Visualizer:Xinglu Zhao
 
-Shelf:
+Shelf: Qiansan
 
 Robot: rschne
 
