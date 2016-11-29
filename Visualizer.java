@@ -1,4 +1,4 @@
-package production;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -25,17 +25,60 @@ import static org.mockito.Mockito.when;
  * what is happening in the warehouse
  */
 public class Visualizer {
+ /**
+ *
+ * @author zhaoxinglu
+ * @param Floor, which initialize the Floor size to be 7
+ * two initializer,both of them call the setup method to 
+ * print ouo the basic information
+ */
+   Floor x=new Floor(7);
+   
+  public Visualizer(){setup();}//default initializer
+  
+  public Visualizer(Floor x1){
+      x=x1;
+      setup();
+  }
+  /**
+ *
+ * @author zhaoxinglu
+ * setup method just print out where fixed things are in the warehouse
+ */
+  public void setup(){
+        
+        System.out.println("Warehouse size is:"+x.floorSize());
+        System.out.println("Belt information");
+        System.out.println("Picker at:"+x.getPicker());
+        System.out.println("Packer at:"+x.getPacker());
+        System.out.println("Shipping dock at"+x.shipping());
+        System.out.println("Receiving Dock at"+x.getReceving());
+        System.out.println("Charger at"+x.getCharger());
+        
+        
+        for(int i=0;i<x.getShelf().size();i++){
+            
+          System.out.println("Shelf "+i+"is at"+x.getShelf().get(i));}//shelf
+        
+        
+       
+    }
+  
    /**
  *
  * @author zhaoxinglu
- * main method mainly calls createandshowGUI method
+ * @input int, which represents the total tick number
+ * this method call create and show GUI method every tick
  */
+  public void tick(int n){
     
-    
-  public static void main(String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
+      SwingUtilities.invokeLater(new Runnable() {
+        
       public void run() {
-        createAndShowGUI(); 
+         String display = "Tick %d";
+	
+         System.out.println(String.format(display,n));
+         createAndShowGUI(); 
         }
       });
     }
@@ -49,15 +92,32 @@ public class Visualizer {
  * The EXIT_ON_CLOSE operation exits the program when user closes the frame
  */
 
-    private static void createAndShowGUI() {
-       
+    private void createAndShowGUI() {
+        
         JFrame f = new JFrame("Warehouse");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         
-        f.add(new MyPanel(new Mockfloor())); 
+        f.add(new MyPanel(this.x)); 
         f.pack();
         f.setVisible(true);
     } 
+    
+    
+    
+ /**
+ *
+ * @author zhaoxinglu
+ * main method is used to test code
+ */
+    public static void main(String[] argus){
+        Floor v1=new Floor(9);
+        Visualizer v=new Visualizer(v1);
+        
+        for (int i=0;i<=2;i++){
+            v.tick(i);
+        }
+       
+    }
 
 
 }
@@ -68,24 +128,27 @@ public class Visualizer {
  */
 class MyPanel extends JPanel {
     
-    Mockfloor m;
+    ViewFloor m;
     MockBelt b=new MockBelt();
     MockRobot r=new MockRobot();
     
  /**
  *
  * @author zhaoxinglu
- * @param m is a object of Mockfloor class, Mypanel can get information of warehouse from it
+ * @param m is an interface implemented by the floor class
+ * Mypanel can get information of warehouse from it
  * @param b is a object of MockBelt class, Mypanel class can get track of the item on the belt
  * @param r is a object of MockRobot class,Mypanel class can get coordinate of the robot
  * all mock class has been written for convinient testing
  */
   
     
-    public MyPanel(Mockfloor m1) {
+    public MyPanel(Floor m1) {
          setBorder(BorderFactory.createLineBorder(Color.black));
-         this.m=m1;
-         setup();
+         m=m1;
+         
+         tick();
+         
     }
     /**
  *
@@ -97,56 +160,35 @@ class MyPanel extends JPanel {
     
     
     
-    public void setup(){
-        
-        System.out.println("Warehouse size is:"+m.size);
-        System.out.println("Belt information");
-        System.out.println("Picker at:"+m.getPicker());
-        System.out.println("Packer at:"+m.getPacker());
-        System.out.println("Shipping dock at"+m.getShippingDock());
-        System.out.println("Receiving Dock at"+m.getReceivingDock());
-        System.out.println("Charger at"+m.getCharger());
-        System.out.println("Item is at:"+b.TrackItem());
-        System.out.println("Robot is at"+r.TrackRobot());
-       
-    }
     
-    /**
- *
- * @author zhaoxinglu
- * setup method just print out where fixed things are in the warehouse
- */
-    public void tick(int count){
-        String display = "Tick %d";
-	
-        System.out.println(String.format(display,count));
+    
+   
+    public void tick(){
         
-	System.out.println("Item is at:"+b.TrackItem());
+	System.out.println("Item1 is at:"+b.TrackItem());
         
-        System.out.println("Robot is at"+r.TrackRobot());
+        System.out.println("Robot1 is at"+r.TrackRobot());
         
-	for(int i=0;i<m.j;i++){
+	for(int i=0;i<m.getShelf().size();i++){
             
           System.out.println("Shelf"+i+"is at"+m.getShelf().get(i));}//shelf
     
     }
-    /**
+ /**
  *
  * @author zhaoxinglu
- * @input int, make method print out things state at input time
- * @param String just represents word tick
- * tick method update item coordinates at specific time
+ * tick method update moving item coordinates every tick
  */
     
     public void paint(Graphics g) {
        ArrayList<Point> sf=m.getShelf();
-       g.drawRect(10,10,m.getWarehousesize()*20,m.getWarehousesize()*20);//warehouse 
-       g.drawRect(10, 10, 20, (m.b-1)*20);//belt
-       for(int i=0;i<m.j;i++){
+       g.drawRect(10,10,m.floorSize()*20,m.floorSize()*20);//warehouse 
+       g.drawRect(10, 10, 20, (m.getBelt().size()-1)*20);//belt
+       for(int i=0;i<m.getShelf().size();i++){
           g.drawRect(sf.get(i).x*20+10, sf.get(i).y*20+10, 20, 20);}//shelf
       
        g.setColor(Color.green);
-       g.drawLine(m.getReceivingDock().x*20+10,m.getReceivingDock().y*20+10,m.getReceivingDock().x*20+30,m.getReceivingDock().y*20+10);//draw for receiving dock
+       g.drawLine(m.getReceving().x*20+10,m.getReceving().y*20+10,m.getReceving().x*20+30,m.getReceving().y*20+10);//draw for receiving dock
        g.setColor(Color.yellow);
        g.drawLine(10,10,30,10);//draw for shipping dock
        g.setColor(Color.blue);
