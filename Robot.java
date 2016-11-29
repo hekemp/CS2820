@@ -15,6 +15,7 @@ public class Robot implements Event{
 	private int robotCharge;
 	private boolean shelf = false;
 	public boolean usable = true;
+	private Point location;
 	private int xCord;
 	private int yCord;
 	private PriorityQueue<Event> robotEvents;
@@ -81,6 +82,10 @@ public class Robot implements Event{
 			usable = true;
 		}
 	}
+	
+      public Point getLocation() {
+      	       return this.location.getLocation();
+      }
 	
 	/**
 	* @author Rachel Schneberger
