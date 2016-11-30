@@ -109,7 +109,14 @@ public class itemcontrol implements Event{
 		
 	}
 	public void performAction(String Method){
-		System.out.println("Inventory did something");
+		String[] action = Method.split(",");
+		List<String> doAction = new ArrayList<String>(Arrays.asList(action));
+		if("itemcontrol".equals(doAction.get(0))){
+			this.itemcontrol());
+		}
+		if("checkstatus".equals(doAction.get(0))){
+			this.checkstatus());
+		}
 	}
 		
 		
