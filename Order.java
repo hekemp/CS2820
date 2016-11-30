@@ -7,19 +7,22 @@ import java.util.HashMap;
  *
  */
 public class Order {
-	
 	String progress;
 	String address;
 	String dateReceived;
 	int orderNumber;
-	orderitems = items;
-	HashMap<String, Integer> Item;
+	boolean isFilled;
+	OrderItem[] orderitems;
+	
+	HashMap<String, Integer> Itemstatus;
+	
 	public Order(String progress,String address, String dateReceived,int orderNumber, OrderItem[] items){
 		progress=progress;
 		address=address;
 		dateReceived=dateReceived;
 		this.orderNumber=orderNumber;
-		this.Item= new HashMap<String,Integer>();
+		orderitems=items;
+		this.Itemstatus= new HashMap<String,Integer>();
 		
 	}
 	
