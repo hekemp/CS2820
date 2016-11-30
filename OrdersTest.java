@@ -13,7 +13,7 @@ import org.junit.Test;
  *  * @author hyo kyung kang
  *
  */
-public class OrdersTest {
+public class OrderTest {
 
 	/**
 	 * @throws java.lang.Exception
