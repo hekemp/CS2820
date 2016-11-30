@@ -7,7 +7,7 @@ package production;
  * to keep track of the progress of this in an order
  *
  */
-public class OrderItem extends Item {
+public class OrderItem extends item {
   boolean inBin;
   /**
    * @author Ted Herman
@@ -21,7 +21,7 @@ public class OrderItem extends Item {
 	super(Num,Title);
 	inBin = false;
     }
-  public OrderItem(Item N) {
+  public OrderItem(item N) {
 	this(N.itemID,N.type);
     }
   public boolean filled() { return inBin; }
