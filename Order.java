@@ -6,7 +6,7 @@ import java.util.HashMap;
  * @author hyo kyung kang also credited to prof Ted Herman
  *
  */
-public class Order {
+public class Order implements Event{
 	String progress;
 	String address;
 	String dateReceived;
