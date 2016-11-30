@@ -4,14 +4,21 @@ import java.util.ArrayList;
 
 
 
-	//@author Yunfan Jiang
+	/**
+	 * @author Yunfan Jiang
+	 *  inventory class 
+	 * 
+	 */
 public class itemcontrol implements Event{
 	int totalnum;
 	int currentID;           
 	int maxinventory=80;
 	String[] itemlist={"pen","pear","apple","banana","pen","pineapple","eraser","ruler","comic book","ruler","laptop","pear","eraser","comic book"};
 		
-		//initialize at the first tick/ event
+	/**
+	 * @author Yunfan Jiang
+	 * initialize the stock at the beginning
+	 */
 	public void itemcontrol(){
 			//import a list of items
 		currentID=0;
@@ -21,13 +28,22 @@ public class itemcontrol implements Event{
 			placeitemtoshelf(item x);
 			currentID++;
 			totalnum++;
-				System.out.println("item with ID"+currentID+"has been added to shelf");
+			System.out.println("item with ID"+currentID+"has been added to shelf");
 			}
 		System.out.println("Inventory Initialized" );	
 		}
-		//Order can use this method to locate the item
+		/**
+		 * @author Yunfan Jiang
+		 * @param product
+		 * find the location of ONE of the many items with order description
+		 */
+	
 	public Shelf finditem(String product){
-		for (int j=0;j<floor.shelf.length;j++){  //need to check if shelf is moving here
+		/**
+		 * it would be better to if we could tell shelf is moving here
+		 * to avoid calling a moving shelf
+		 */
+		for (int j=0;j<floor.shelf.length;j++){ 
 			for (item i:floor.shelf[j]){
 				if(i.type==product){
 					System.out.println("item is located at Shelf"+j);
@@ -39,8 +55,12 @@ public class itemcontrol implements Event{
 		}	
 	}
 		
-		
-		//Order can use this method to remove item from shelf before putting it put on the belt
+		/**@author Yunfan
+		 * @param item i
+		 * @param shelf y
+		 * remove a item from its shelf 
+		 */
+	
 	public item removeitem(item i, Shelf y){
 		y.removeItems(i);
 		totalnum--;
@@ -48,7 +68,10 @@ public class itemcontrol implements Event{
 		return i;
 	}
 
-		//Everytime an order is completed, check status and update stock
+		/**@author Yunfan Jiang
+		 * this method check the number of stocks
+		 * and update inventory if stock is low
+		 */
 	public void checkstatus(){
 		if (totalnum<20){		
 			increaseinventory(maxinventory-totalnum);
@@ -56,7 +79,10 @@ public class itemcontrol implements Event{
 			}
 		}
 			
-		
+		/**@author Yunfan Jiang
+		 * this is an inner method I used for 
+		 * constructor and increaseinventory
+		 */
 	private void placeitemtoshelf(item x){
 		for (int j=0;j<floor.shelf.length;j++){
 			if(floor.shelf[j].items<20){
@@ -65,7 +91,10 @@ public class itemcontrol implements Event{
 			}
 		}
 	}
-		
+		/**@author Yunfan Jiang
+		 * @param int number to increase
+		 * this is an inner method for checkstatus
+		 */
 		
 	private void increaseinventory(int x){
 		while(totalnum<maxinventory){
@@ -97,4 +126,3 @@ public class itemcontrol implements Event{
 
 	}
 	
-
