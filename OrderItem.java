@@ -22,7 +22,7 @@ public class OrderItem extends Item {
 	inBin = false;
     }
   public OrderItem(Item N) {
-	this(N.id,N.description);
+	this(N.itemID,N.type);
     }
   public boolean filled() { return inBin; }
   public void setFilled() { inBin = true; }
