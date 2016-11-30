@@ -18,7 +18,7 @@ public class OrderTest implements Orders, Tickable, Picker {
   private SimRandom randomsource;
   private Order currentorder; 
   private Bin currentbin;
-  private Item neededitem;
+  private item neededitem;
   
   /**
    * @author Ted Herman
