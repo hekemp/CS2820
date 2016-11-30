@@ -5,6 +5,8 @@ public class item {
 	/** 
 	 *  
 	 * @author Yunfan Jiang
+	 * This class defines features of an item, which will be 
+	 * transported around in the warehouse
 	 * 
 	 */ 
 
@@ -13,21 +15,33 @@ public class item {
 		int itemID;       //Each item has an integer assigned as its unique itemID
 		Shelf place;
 		
+		/**
+		 * @param id
+		 * @param name
+		 * create a new item with given id and description
+		 * 
+		 */
 		item(int id, String name){
 			itemID=id;
 			place=null;
 			type=name;
 		}
-		public Shelf setplace(Shelf x){
+		
+		/**@author Yunfan Jiang
+		 * @param Shelf
+		 * set item's location
+		 */
+		public void setplace(Shelf x){
 		place=x;
 		}
+		
+		/**@return which shelf it is located
+		 */
 		public Shelf getplace(){
-			return place;
+			return this.place;
 		}
 		
 		
 
 	}
-
-
 
