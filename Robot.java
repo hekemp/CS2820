@@ -22,8 +22,10 @@ public class Robot implements Event{
 	private int robotCharge;
         private ArrayList<Point> robotRoute = new ArrayList<Point>();
 	private boolean shelf = false;
+        private Point shelfLocation;
 	public boolean usable = true;
         private Point location;
+        private Point robotDestination;
 	private int xCoord;
 	private int yCoord;
 	private PriorityQueue<Event> robotEvents;
@@ -76,7 +78,22 @@ public class Robot implements Event{
             for (int i = 1; i<robotRoute.size(); i++){
                 robotEvents.add(this);
                 robotParameters.add("move," + robotRoute.get(i).getX() + "," + robotRoute.get(i).getY());
+                if (shelf == true){
+                    robotParameters.add("moveShelf" + robotRoute.get(i).getX() + "," + robotRoute.get(i).getY());
+                }
                 System.out.println("New move enqueued");
+            }
+            
+        }
+        
+        //check where the robot is within a route
+        //How does a robot know when it gets to a shelf or a picking station?
+        public void taskStatus(){
+            if (robotDestination == location){
+                //pick shelf
+                //drop shelf
+                //some other task
+                System.out.println("I'm working on this.");
             }
         }
         
@@ -94,8 +111,12 @@ public class Robot implements Event{
 		xCoord = x;
 		yCoord = y;
                 location.move(x, y);
+                //checks if shelf is true. If yes, then shelfLocation updates with the robot.
+                if (shelf == true){
+                    shelfLocation.move(x, y);
+                }
                 robotCharge = this.robotCharge -1; //decrease charge after every move?
-                                                   //how will this get checked
+                                                   //how will this get checked?
 		System.out.println("Robot: " + robotId + " has moved: " + xCoord + yCoord);
 		
 	}
@@ -159,6 +180,7 @@ public class Robot implements Event{
                 if("restAndCharge".equals(doAction.get(0))){
                     this.restAndCharge(x,y);
                 }
+                //not correct yet....just temporary
                 if("checkCharge".equals(doAction.get(0))){
                     this.move(x, y);
                     // replace x and y with specific location of charger
