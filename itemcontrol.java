@@ -9,7 +9,7 @@ import java.util.ArrayList;
 	 *  inventory class 
 	 * 
 	 */
-public class itemcontrol implements Event{
+public class inventory implements Event{
 	int totalnum;
 	int currentID;           
 	int maxinventory=80;
@@ -19,7 +19,7 @@ public class itemcontrol implements Event{
 	 * @author Yunfan Jiang
 	 * initialize the stock at the beginning
 	 */
-	public void itemcontrol(){
+	public void inventory(){
 			//import a list of items
 		currentID=0;
 		totalnum=0;
