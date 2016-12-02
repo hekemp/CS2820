@@ -111,8 +111,8 @@ public class inventory implements Event{
 	public void performAction(String Method){
 		String[] action = Method.split(",");
 		List<String> doAction = new ArrayList<String>(Arrays.asList(action));
-		if("itemcontrol".equals(doAction.get(0))){
-			this.itemcontrol());
+		if("inventory".equals(doAction.get(0))){
+			this.inventory());
 		}
 		if("checkstatus".equals(doAction.get(0))){
 			this.checkstatus());
@@ -127,7 +127,7 @@ public class inventory implements Event{
 		
 		
 	public String getPara(){
-		   return "Null";
+		   return "";
 		  }
 
 
