@@ -108,15 +108,15 @@ public class inventory implements Event{
 		}
 		
 	}
+	
+	/**@Yunfan Jiang
+	 * @Override
+	 * In every tick, check status
+	 * automatically start to increase stock if low
+	 */
 	public void performAction(String Method){
-		String[] action = Method.split(",");
-		List<String> doAction = new ArrayList<String>(Arrays.asList(action));
-		if("inventory".equals(doAction.get(0))){
-			this.inventory());
-		}
-		if("checkstatus".equals(doAction.get(0))){
-			this.checkstatus());
-		}
+		checkstatus();
+	
 	}
 		
 		
