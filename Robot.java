@@ -101,12 +101,12 @@ public class Robot implements Event{
         			floor.getRoute(1,1); ///replace 1s with location of picking station.
         			System.out.println("Got shelf. Getting route to picking station.")
         		}
-        		if
                 //pick shelf
                 //drop shelf
                 //some other task
                 System.out.println("I'm working on this.");
-            }
+            	}else{
+			System.out.println("I'm worrking on this too.");
         }
         
         
