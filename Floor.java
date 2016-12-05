@@ -108,5 +108,10 @@ public class Floor implements viewFloor,robotPath {
         route.add(p2);
         return route;
     }
-	
+	/**@author yunfjiang
+	 * to return a list of all shelf
+	 */
+	public Shelf[] myShelf(){
+		return this.shelf;
+	}
 }
