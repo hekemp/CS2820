@@ -53,6 +53,10 @@ public class Order implements Event{
 		
 	}
 	public void addItems(){
+	  orderItems.add(a);
+	}
+		
+		
 		
 	}
 	public void getProgress(){
