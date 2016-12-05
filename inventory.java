@@ -10,6 +10,9 @@ import java.util.ArrayList;
 	 * 
 	 */
 public class inventory implements Event{
+	Robot robot;
+	Floor floor;
+	Shelf[] myshelf;
 	int totalnum;
 	int currentID;           
 	int maxinventory=80;
@@ -19,8 +22,11 @@ public class inventory implements Event{
 	 * @author Yunfan Jiang
 	 * initialize the stock at the beginning
 	 */
-	public void inventory(){
-			//import a list of items
+	public void inventory(Floor y, Robot x ){
+		
+		this.floor=y;
+		this.robot=x;
+		this.myshelf=y.myShelf();
 		currentID=0;
 		totalnum=0;
 		for (int z=0;z<itemlist.length&&z<maxinventory;z++){
@@ -43,8 +49,8 @@ public class inventory implements Event{
 		 * it would be better to if we could tell shelf is moving here
 		 * to avoid calling a moving shelf
 		 */
-		for (int j=0;j<floor.shelf.length;j++){ 
-			for (item i:floor.shelf[j]){
+		for (Shelf j:this.myshelf){ 
+			for (item i:j){
 				if(i.type==product){
 					System.out.println("item is located at Shelf"+j);
 					return i.getplace();
@@ -84,9 +90,9 @@ public class inventory implements Event{
 		 * constructor and increaseinventory
 		 */
 	private void placeitemtoshelf(item x){
-		for (int j=0;j<floor.shelf.length;j++){
-			if(floor.shelf[j].items<20){
-				floor.shelf[j].addItems(x.itemID);	
+		for (Shelf j:this.myshelf){ 
+			if(j.items<20){
+				j.addItems(x);	
 				break;	
 			}
 		}
@@ -98,16 +104,34 @@ public class inventory implements Event{
 		
 	private void increaseinventory(int x){
 		while(totalnum<maxinventory){
-			item a= new item(currentID,itemlist[currentID]);    
+			    
+			for (Shelf i:myshelf){
+				if (!i.full()){
+					int moveX=this.robot.getXcord-i.getX;
+					int moveY=this.robot.getYcord-i.getY;		
+					this.robot.move(moveX,moveY);
+					this.robot.pickShelf();
+					int movex=this.robot.getXcord-this.floor.getReceiving().x;
+					int movey=this.robot.getYcord-this.floor.getReceiving().y;
+					this.robot.move(movex,movey);
+					while(!i.full()){
+						item a= new item(currentID,itemlist[currentID]);
+						currentID++;
+						i.addItems(a);	
+						}
+					this.robot.move(this.robot.getXcord-i.getX,this.robot.getYcord-i.getY);
+					this.robot.dropshelf();
+						
+				}
 				
-			//unfinished
-			//need to call available robots here
-			for (Robot i:)
-			placeitemtoshelf(a);
-				currentID++;	
+			}
+		
+			
+			
 		}
 		
 	}
+	
 	
 	/**@Yunfan Jiang
 	 * @Override
