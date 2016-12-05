@@ -89,13 +89,28 @@ public class Robot implements Event{
         //check where the robot is within a route
         //How does a robot know when it gets to a shelf or a picking station?
         public void taskStatus(){
-            if (robotDestination == location){
+        	if (getLocation() == robotDestination){ //checking if robot is at the end of a route
+        		if (shelf == true){ //meaning robot is carrying a shelf...drop it
+        			this.shelf = false;
+        			this.shelfLocation = getLocation();
+        		}
+        		if (shelf == false){
+        			this.shelf = true;
+        			this.shelfLocation = getLocation();
+        			Floor floor = new Floor();
+        			floor.getRoute(1,1); ///replace 1s with location of picking station.
+        			System.out.println("Got shelf. Getting route to picking station.")
+        		}
+        		if
                 //pick shelf
                 //drop shelf
                 //some other task
                 System.out.println("I'm working on this.");
             }
         }
+        
+        
+    
         
 	/**
 	* @author Rachel Schneberger
@@ -118,7 +133,7 @@ public class Robot implements Event{
                 robotCharge = this.robotCharge -1; //decrease charge after every move?
                                                    //how will this get checked?
 		System.out.println("Robot: " + robotId + " has moved: " + xCoord + yCoord);
-		
+		taskStatus();
 	}
 	
 	/**
