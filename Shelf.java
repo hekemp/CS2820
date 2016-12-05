@@ -10,8 +10,8 @@ class Shelf{
 	ArrayList<item> Item = new ArrayList<>();
 	int x, y;
 	/**@author yunfjiang
-	 * Added a Point/location 
-	 * and a boolean to tell if full
+	 * Point/location 
+	 * boolean to tell if full
 	 */
 	Point location; 
 	boolean iffull=false;
@@ -44,8 +44,9 @@ class Shelf{
 	}
 	
 	/**@author yunfjiang
-	 * added three getters
-	 * to get location and coordinators
+	 * to get location
+	 * and calculate robot move
+	 * 
 	 */
 	public Point getlocation(){
 		return location;
