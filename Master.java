@@ -19,7 +19,7 @@ public class Master
     private ArrayList<String> myParameters;
     private Belt myBelt;
     private Floor myFloor;
-    private Inventory myInventory;
+    private inventory myInventory;
     private Order myOrder;
     private Robot myRobot;
     private Shelf myShelf;
@@ -42,7 +42,7 @@ public class Master
 	    myFloor = newFloor;
     }
 	
-    public void addInventory(Inventory newInventory){
+    public void addInventory(inventory newInventory){
 	    myInventory = newInventory;
     }
 
