@@ -1,105 +1,98 @@
 package production;
 
 import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * @author Mouna Elkeurti
- * Bin class moves bins with the order from the picker to the packer then 
- * from the packer to the dock location to get it shipped
+ * @param belt variable that indicate which cell in belt the Objects are.
+ * @param moving variable to check if the belt is moving. 
+ * Belt class moves bins in the belt from picker to packer.
+ * At packer location, the belt is stopped and a packer grab a package
+ * and add it to the belt and goes to the shipping dock
  */
 
-public class Belt implements Event{
+public class Belt implements Event {
 
-    
-    boolean moving = false;
-    boolean order_belt = false;
-    double speed = 0.0;
-    private Bin bin;
+    int belt = 0;         
+    boolean moving;       
+    Floor floor;
+    Bin bin;
     Order order;
+    Package packages;
     
-    public Belt(int sp){
-    	speed = sp;
-    }
-    
+    Queue Bin  = new LinkedList();     //Queue that holds bins used for belt
+    Queue Package = new LinkedList();  //Queue that hols package that are need to package the items
+    Queue item = new LinkedList();     //Queue that holds the items in order on the belt
+ 
     /**
      * @author Mouna Elkeurti
-     * @param x is the speed of which the belt is moving with
-     * pausing, starting and changing the speed of the belt
+     * Belt constructor that set the belt cell (belt variable) to 0 
+     * to keep track of where bins/item and package are on belt
      */
-    void changeSpeed(double x){
-        speed = x;
-    }
     
-    /**
-     * @author Mouna Elkeurti 
-     * pausing the belt to leave time for the picker to add bin on the bell then restart it
-     */
-    void pause(){
-        speed = 0;
-    }
-    
-    void start(double x){
-        speed = x;
-    }
-    
-    boolean ismoving(){
-    	moving = true;
-    	System.out.println( "Belt is moving");
-	return moving;
-    }
+    public Belt(Floor f){
+    	this.floor = f;
+    	belt =0;
+    	moving = false;
     	
-   
-    
-    ArrayList<Bin> binOnBelt = new ArrayList<>();
-     
-    /**
-     * @author Mouna Elkeurti
-     * @param bins are added to the belt
-      * the picker add bins to the belt to the packer
-      */
-    void add(Bin bin){
-    	pause();
-    	binOnBelt.add(bin);
-    }
-    /**
-     * @author Mouna Elkeurti 
-     * @param bins are removed from the belt
-     * bin is removed from the belt once it arrives to the dock location
-     */
-    void remove(Bin bin){
-    	binOnBelt.remove(binOnBelt.size()-1);
-    	ismoving();
     }
     
-    ArrayList<Order> orderOnBelt = new ArrayList<>();
+    // populating an initial Queue for bins
+    public void populateBin(){
+    	Bin.offer(bin);Bin.offer(bin);Bin.offer(bin);
+    	Bin.offer(bin);Bin.offer(bin);Bin.offer(Bin);
+    	Bin.offer(bin);
+    	
+    	}
     
-    /**
-     * @author Mouna Elkeurti
-     * @param orders are added to the belt 
-     * method can be used by order to add a new order in the belt or remove it to go to the dock
-     */
-    void addOrder(Order order){
-    	orderOnBelt.add(order);
+    // Populating an intial Queue for packages
+    public void popoluatePackage(){
+    	Package.offer(packages);Package.offer(packages);Package.offer(packages);
+    	Package.offer(packages);Package.offer(packages);Package.offer(packages);
+    	Package.offer(packages);
+    }
+    
+    // Populate an intial Queue fro items
+    public void populateItem(){
+    	item.offer(item);item.offer(item);item.offer(item);
+    	item.offer(item);item.offer(item);item.offer(item);
+    	item.offer(item);
     }
     
     /**
      * @author Mouna Elkeurti
-     * Order arrives the to the shipping dock
      */
-    void getorderNumber(){    // to scan the order
-        return orderNumber;
+    public void moveBelt(){
+    	while( Bin.isEmpty() == false && Package.isEmpty() == false){
+    		Bin.peek();
+    		item.peek();
+    		Bin.offer(bin);
+    		item.offer(item);
+    		belt++;
+    		if (belt ==4){
+    			moving =false;
+    			pack();
+    			}
+    		if (belt == 7){
+    		belt =0;
+    		}
+    		
+    	moving = true;
+    	}
+    	
     }
     
-    void removeOrder(Order order){
-    	orderOnBelt.remove(orderOnBelt.size()-1);
-    }
-    
-    //void scan(){
-    //}
-    
-    void pack(){
-    	pause();
-    	order_belt = true;
+    /**
+     * @author Mouna Elkeurti
+     */
+    public void pack(){
+    	while(Package.isEmpty()==false && belt == 4){
+    		Package.peek();
+    		moving = false;
+    	}
+    	Package.peek();
     }
     
     public void performAction(String Method){
@@ -113,5 +106,7 @@ public class Belt implements Event{
     
     public String getPara(){ // not implemented yet
     }
+    
 
+   
 }
