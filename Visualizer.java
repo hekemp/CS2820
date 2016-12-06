@@ -162,7 +162,7 @@ public class Visualizer implements Event{
  */
 class MyPanel extends JPanel {
     
-    ViewFloor m;
+    viewFloor m;
     MockBelt b=new MockBelt();
     MockRobot r=new MockRobot();
     
