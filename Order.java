@@ -17,6 +17,13 @@ public class Order implements Event {
 	
 	ArrayList<item>orderItemstatus;
 	
+	/**
+	 * @author Mouna Elkeurti
+	 * Default constructor needed for belt
+	 */
+	
+	public Order(){}
+	
 	public Order(String progress,String address, String dateReceived,int orderNumber, OrderItem[] items){
 		progress=progress;
 		address=address;
