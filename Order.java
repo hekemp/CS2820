@@ -1,12 +1,13 @@
 package production;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+
 /**
  * 
  * @author hyo kyung kang also credited to prof Ted Herman
  *
  */
-public class Order implements Event{
+public class Order implements Event {
 	String progress;
 	String address;
 	String dateReceived;
@@ -14,7 +15,7 @@ public class Order implements Event{
 	boolean isFilled;
 	OrderItem[] orderitems;
 	
-	HashMap<String, Integer> Itemstatus;
+	ArrayList<item>orderItemstatus;
 	
 	public Order(String progress,String address, String dateReceived,int orderNumber, OrderItem[] items){
 		progress=progress;
@@ -22,7 +23,7 @@ public class Order implements Event{
 		dateReceived=dateReceived;
 		this.orderNumber=orderNumber;
 		orderitems=items;
-		this.Itemstatus= new HashMap<String,Integer>();
+		this.orderItemstatus= orderItemstatus;
 		
 	}
 	
@@ -34,34 +35,53 @@ public class Order implements Event{
 	isFilled = true;  // because all OrderItems are in bin
 	return null; // if no needed OrderItem can be found
    	 }
- 	 public String getAddress() { return address; }
+	
+	public void itemadding(item o) {
+		orderItemstatus.add(o);
+	}
+	
+	public void itemremoving(item o){
+		orderItemstatus.remove(o);
+		
+	}
+	
+	public boolean itemcontaining(item o){
+		if (orderItemstatus.contains(o)){
+			return true;
+		}
+		else{
+			return false;
+		}
+			
+		
+	}
+	
+	
+	
+	public String showAddress() { return address; }
   	public OrderItem[] getOrderItems() { return orderitems; }
+	public void cancel(){}
 	
+	public void returningprocess(){	}
 	
-	
-	public void ship(String dateReceived){
-	
-	}
-	public void cancel(){
-		
-	}
-	
-	public void changeProgress(){
-		
-	}//
-	public void returningprocess(){
+	public String getProgress(){
+		return progress;
 		
 	}
-	public void addItems(){
-	  orderItems.add(a);
+
+	@Override
+	public void performAction(String Method) {
+			}
+
+	@Override
+	public Event getEvent() {
+		return (Event)this;
 	}
-		
-		
-		
+
+	@Override
+	public String getPara() {
+		return "";
 	}
-	public void getProgress(){
-		
-	}//
 	
 	
 }
