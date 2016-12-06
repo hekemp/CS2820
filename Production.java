@@ -13,8 +13,8 @@ public class Production
     public static void main(String[] args){
         Belt newBelt = new Belt();
         Floor newFloor = new Floor();
-        Inventory newInventory = new Inventory();
-        Order newOrder = new Order();
+        inventory newInventory = new inventory();
+        Order newOrder = new Order(String asdf ,String asxcv ,String zxcvb, int p, OrderItem[] orderutemsdfg);
         Robot newRobot = new Robot(0,0,1,100);
         Shelf newShelf = new Shelf();
         Visualizer newVisualizer = new Visualizer();
