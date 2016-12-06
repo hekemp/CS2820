@@ -1,4 +1,4 @@
-
+package production;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
  * @author zhaoxinglu
  * Visualizer class is use Java Swing to show a picture of
  * what is happening in the warehouse
+ * implements Event interface to be called by the Master class
  */
 public class Visualizer implements Event{
  /**
@@ -104,6 +105,7 @@ public class Visualizer implements Event{
     
     
 	/**
+	 * @author zhaoxinglu 
 	 * Performs an action. Extracts the method to be executed and parameters from the method strong and then executes these
 	 * methods.
 	 * @input - a string which contains a method name/key and parameters, seperated by commas
@@ -122,6 +124,7 @@ public class Visualizer implements Event{
                 
 	
 	/**
+	 * @author zhaoxinglu
 	 * Gets the event. Returns this object as an Event
 	 */
 	
@@ -129,6 +132,7 @@ public class Visualizer implements Event{
             return (Event)this;};
 	
 	/**
+	 * @author zhaoxinglu
 	 * Gets the parameters. Returns the parameter for the next call of this method.
 	 */
 	public String getPara(){return "";};
