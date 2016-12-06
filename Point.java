@@ -32,7 +32,7 @@ class Point{
 	
 	// if the point is a highway return true
 	public boolean highway(){
-		return shelf||picker||packer||receving||shipping||charger;
+		return !(shelf||picker||packer||receving||shipping||charger);
 	}
 	
 	/**
@@ -40,7 +40,7 @@ class Point{
      * @return a readable tuple of the point
      */
 	@Override
-    public String toString(){
+        public String toString(){
         String s;
         s = String.format("(%d"+","+"%d)", x, y);
         return s;
