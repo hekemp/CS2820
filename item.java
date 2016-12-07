@@ -21,6 +21,8 @@ public class item {
 		 * create a new item with given id and description
 		 * 
 		 */
+	        item(){}   // default item constructor added by melkeurti
+	
 		item(int id, String name){
 			itemID=id;
 			place=null;
