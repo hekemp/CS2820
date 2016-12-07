@@ -9,7 +9,7 @@ package production;
 public class Regularship extends Order{
 
 	public Regularship(String progress, String address, String dateReceived, int orderNumber) {
-		super(progress, address, dateReceived, orderNumbe, nullr);
+		super(progress, address, dateReceived, orderNumber, null);  // Some debugging, Xinyu Qian
 		
 	}
 
