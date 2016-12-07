@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.awt.Point;
+import production.Floor;
+import production.Point;
 
 /**
 * @author Rachel Schneberger
@@ -16,16 +17,18 @@ import java.awt.Point;
 * ...............
 */
 
-public class Robot implements Event{
+public class Robot extends Production implements Event{
 	
 	private int robotId;
-	private int robotCharge;
+        private Floor myFloor;
+        private Shelf myShelf;
         private ArrayList<Point> robotRoute = new ArrayList<Point>();
 	private boolean shelf = false;
         private Point shelfLocation;
 	public boolean usable = true;
         private Point location;
         private Point robotDestination;
+        private String robotTask;
 	private int xCoord;
 	private int yCoord;
 	private PriorityQueue<Event> robotEvents;
@@ -36,22 +39,15 @@ public class Robot implements Event{
 	* @author Rachel Schneberger
 	* Robot constructor that sets a starting location, its id and a full charge
 	*/
-	public Robot(int x, int y, int id, int charge){
+	public Robot(Floor floor, Shelf shelf, int x, int y, int id){
 		xCoord = x;
 		yCoord = y;
+                myFloor = floor;
+                myShelf = shelf;
                 this.location = new Point(xCoord, yCoord);
 		robotId = id;
-		robotCharge = charge;
 	}
 	
-	/**
-	 * @author Heather Kemp
-	 * returns the robot ID
-	 */
-	
-	public int getID(){
-		return this.robotId;
-	}
         /**
          * @author Rachel Schneberger
          * returns a Point with location of robot
@@ -101,24 +97,39 @@ public class Robot implements Event{
         		if (shelf == true){ //meaning robot is carrying a shelf...drop it
         			this.shelf = false;
         			this.shelfLocation = getLocation();
+                                robotParameters.add("a"); // automatically goes back to charger
+                                //we can work on getting route to charger
         		}
-        		if (shelf == false){
+        		if (shelf == false){ //meaning robot is not carrying a shelf...pick it up
         			this.shelf = true;
         			this.shelfLocation = getLocation();
-        			Floor floor = new Floor();
-        			floor.getRoute(1,1); ///replace 1s with location of picking station.
-        			System.out.println("Got shelf. Getting route to picking station.")
-        		}
+                                
+                                //get a new route to picker
+                        }
                 //pick shelf
                 //drop shelf
                 //some other task
                 System.out.println("I'm working on this.");
-            	}else{
-			System.out.println("I'm worrking on this too.");
+            }
         }
         
-        
-    
+        public void assignTask(String task){
+            if(task.equals("toShelf")){
+                robotTask = task;
+                robotRoute = myFloor.getRoute(getLocation(), myShelf.getlocation());
+                System.out.println("Robot received new route to shelf.");
+            }
+            if(task.equals("toPicker")){
+                robotTask = task;
+                robotRoute = myFloor.getRoute(getLocation(), myFloor.getPicker());
+                System.out.println("Robot received new route to picker.");
+            }
+            if(task.equals("toCharger")){
+                robotTask = task;
+                robotRoute = myFloor.getRoute(getLocation(), myFloor.getCharger());
+                System.out.println("Robot received new route to charger");
+            }
+        }
         
 	/**
 	* @author Rachel Schneberger
@@ -138,90 +149,43 @@ public class Robot implements Event{
                 if (shelf == true){
                     shelfLocation.move(x, y);
                 }
-                robotCharge = this.robotCharge -1; //decrease charge after every move?
-                                                   //how will this get checked?
-		System.out.println("Robot: " + robotId + " has moved: " + xCoord + yCoord);
+		System.out.println("Robot: " + String.valueOf(robotId) + " has moved: " + String.valueOf(xCoord) + String.valueOf(yCoord));
 		taskStatus();
 	}
-	
-	/**
-	* @author Rachel Schneberger
-	* @param roboId - number to identify which robot (in our case, only one)
-	* @param charge - number of current robot charge. 
-        * Probably not necessary 
-	* robot is being used and when robot is being charged.
-	*/
-	public void restAndCharge(int roboId, int charge){
-		//robots cannot be used while charging
-		// charge increases by one....eventually. 
-                //called as an event....when?
-                robotCharge = charge;
-                usable = false;
-		while (robotCharge < 50){
-			robotCharge = robotCharge +1;
-		}
-		usable = true;
-	}
-	
+
 	/**
 	* @author Rachel Schneberger
 	*/
-	public void checkCharge(){
-		//when a robot is usable = true
-		//charge needs to decrease by one every clock tick
-		if (robotCharge == 20){
-                    move(1,1);//change x and y to actual charging station point
-		}
-		if (robotCharge == 0){
-                    usable = false;
-		}
-		else{
-                    usable = true;
-		}
-	}
-	/**
-	* @author Rachel Schneberger
-	* @author Heather Kemp
-	*/
-	public void pickShelf(Shelf newShelf){
+	public void pickShelf(){
 		//wait one clock tick before picking up and moving....we are not implementing tick..
 		shelf = true;
-		this.shelfLocation = newShelf.location;
-		
-		
 	}
         
         public void dropShelf(){
             this.shelf = false;
-	    this.shelfLocation = null;
         }
 	
 	@Override
 	public void performAction(String Method) {
                 String[] action = Method.split(",");
                 List<String> doAction = new ArrayList<String>(Arrays.asList(action));
-                int x = Integer.valueOf(doAction.get(1));
-                int y = Integer.valueOf(doAction.get(2));
                 if("move".equals(doAction.get(0))){
+                    int x = Integer.valueOf(doAction.get(1));
+                    int y = Integer.valueOf(doAction.get(2));
                     this.move(x,y);
-                }
-                if("restAndCharge".equals(doAction.get(0))){
-                    this.restAndCharge(x,y);
-                }
-                //not correct yet....just temporary
-                if("checkCharge".equals(doAction.get(0))){
-                    this.move(x, y);
-                    // replace x and y with specific location of charger
                 }
                 if("pickShelf".equals(doAction.get(0))){
                     pickShelf();
+                }
+                if("assignTask".equals(doAction.get(0))){
+                    this.assignTask(doAction.get(1));
                 }
 	}
 	
 	@Override
 	public Event getEvent() {
 		if(robotEvents.isEmpty()){
-                    return(Event) new Robot(1,1,1,100);
+                    return(Event) new Robot(myFloor, myShelf, 1,1,1);
 		}
 		else{
                     return robotEvents.remove();
