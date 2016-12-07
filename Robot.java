@@ -164,15 +164,17 @@ public class Robot extends Production implements Event{
 
 	/**
 	* @author Rachel Schneberger
+	* @author Heather Kemp
 	*/
-	public void pickShelf(){
-		//wait one clock tick before picking up and moving....we are not implementing tick..
+	public void pickShelf(Shelf newShelf){
 		shelf = true;
+		this.shelfLocation = newShelf.location;
 	}
         
         public void dropShelf(){
             this.shelf = false;
-        }
+	    this.shelfLocation = null;
+	}
 	
 	@Override
 	public void performAction(String Method) {
@@ -186,6 +188,9 @@ public class Robot extends Production implements Event{
                 if("pickShelf".equals(doAction.get(0))){
                     pickShelf();
                 }
+		if("dropShelf".equals(doAction.get(0))){
+		    dropShelf();
+		}
                 if("assignTask".equals(doAction.get(0))){
                     this.assignTask(doAction.get(1));
                 }
