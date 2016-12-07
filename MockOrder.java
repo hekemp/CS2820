@@ -12,7 +12,11 @@ import java.util.*;
 
 public class MockOrder implements Event {
   
-  public MockOrder(){
+  Robot myRobot;
+  Belt myBelt;
+  public MockOrder(Robot newRobot, Belt newBelt){
+    myRobot = newRobot;
+    myBelt = newBelt;
   }
   
   public void performAction(String Method){
