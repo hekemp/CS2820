@@ -2,7 +2,7 @@ package production;
 
 /**
  * 
- * @author Mouna ELkeurti (Similare to Ted Herman's Bin class)
+ * @author Mouna ELkeurti 
  *
  */
 
@@ -12,14 +12,9 @@ public class Package {
 	
 	public Package(){
 		item = null;
-		item_packed = false;
-	}
-	public boolean isPacked(){
-		return true;
-	}
-	public void setPacked(){
 		item_packed = true;
 	}
+	
 	
 
 }
