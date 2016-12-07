@@ -59,6 +59,7 @@ public class inventory implements Event{
 				}
 					
 			}
+	
 		}
 		// Modified by Xinyu Qian, add a return statement if cannot find this item from shelves
 		System.out.println("This item is sold out.");
@@ -111,16 +112,16 @@ public class inventory implements Event{
 			    
 			for (Shelf i:myshelf){
 				if (!i.full()){	
-					this.robot.move(i.getX,i.getY);
+					this.robot.move(i.getX(),i.getY());
 					this.robot.pickShelf();
-					this.robot.move(this.floor.getReceiving().x,this.floor.getReceiving().y);
+					this.robot.move(this.floor.getReceving().x,this.floor.getReceving().y);
 					while(!i.full()){
 						item a= new item(currentID,itemlist[currentID]);
 						currentID++;
 						i.addItems(a);	
 						}
-					this.robot.move(i.getX,i.getY);
-					this.robot.dropshelf();
+					this.robot.move(i.getX(),i.getY());
+					this.robot.dropShelf();
 						
 				}
 				
