@@ -13,15 +13,25 @@ import java.util.*;
 public class MockOrder implements Event {
   
   Robot myRobot;
-  Belt myBelt;
+  MockBeltLine myBelt;
+  Floor myFloor;
+  Shelf myShelf;
   private ArrayList<Event> myEvents;
   private ArrayList<String> myParameters;
+  private inventory myInventory;
+  private int originalX;
+  private int originalY;
+  private int robotX;
+  private int robotY;
   
-  public MockOrder(Robot newRobot, Belt newBelt){
+  public MockOrder(Robot newRobot, inventory newInventory, Floor newFloor){
     myRobot = newRobot;
-    myBelt = newBelt;
+    robotX = newRobot.getXcord();
+    robotY = newRobot.getYcord();
+    myFloor = newFloor;
     myEvents = new ArrayList<Event>();
     myParameters = new ArrayList<Event>();
+    myInventory = new newInventory;
   }
   
   public void performAction(String Method){
@@ -45,6 +55,35 @@ public class MockOrder implements Event {
   }
   
   public void recieveOrder(){
+    System.out.println("Order recieved for: Pen");
+    myShelf = myInventory.finditem("pen");
+    System.out.println("Scheduling robot" + String.valueOf(myRobot.getID()) + " to go pick up shelf with: Pen.");
+    myEvents.add(Event(myRobot));
+    originalX = myShelf.x;
+    originalY = myShelf.y;
+    String robotMove = "move," + String.valueOf(myShelf.x) + "," + String.valueOf(myShelf.y);
+    myParameters.add(robotMove);
   }
+  
+  public void pickUpShelf(){
+    System.out.println("Robot " +  String.valueOf(myRobot.getID()) + " is picking up the shelf with: Pen.");
+    myRobot.pickShelf(myShelf);
+    System.out.println("Robot " + String.valueOf(myRobot.getID()) + " is moving to the picker.");
+    myEvents.add(Event(myRobot));
+    String robotMove = "move," + String.valueOf(myFloor.getPicker().x) + "," + String.valueOf(myFloor.getPicker().y);
+    myParameters.add(robotMove);
+    myBelt = new MockBeltLine(myFloor.getPicker().x,myFloor.getPicker().y,"pen");
+    myEvents.add(Event(myBelt));
+    myParameters.add(" ");
+    myEvents.add(Event(myRobot));
+    String robotMove2 = "move," + String.valueOf(originalX) + "," + String.valueOf(originalY);
+    myParameters.add(robotMove2);
+    myEvents.add(Event(myRobot));
+    myParameters.add("dropShelf,");
+    String robotMove3 = "move," + String.valueOf(robotX) + "," + String.valueOf(robotY
+    myParameters.add(robotMove3);
+    myEvents.add(Event(myRobot);
+  }
+  
   
 }
