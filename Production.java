@@ -11,8 +11,8 @@ package production;
 public class Production
 {
     public static void main(String[] args){
-        Belt newBelt = new Belt();
         Floor newFloor = new Floor();
+        Belt newBelt = new Belt(newFloor);
         inventory newInventory = new inventory();
         Order newOrder = new Order(String asdf ,String asxcv ,String zxcvb, int p, OrderItem[] orderutemsdfg);
         Shelf newShelf = new Shelf();
