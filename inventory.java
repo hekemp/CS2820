@@ -106,20 +106,16 @@ public class inventory implements Event{
 		while(totalnum<maxinventory){
 			    
 			for (Shelf i:myshelf){
-				if (!i.full()){
-					int moveX=this.robot.getXcord-i.getX;
-					int moveY=this.robot.getYcord-i.getY;		
-					this.robot.move(moveX,moveY);
+				if (!i.full()){	
+					this.robot.move(i.getX,i.getY);
 					this.robot.pickShelf();
-					int movex=this.robot.getXcord-this.floor.getReceiving().x;
-					int movey=this.robot.getYcord-this.floor.getReceiving().y;
-					this.robot.move(movex,movey);
+					this.robot.move(this.floor.getReceiving().x,this.floor.getReceiving().y);
 					while(!i.full()){
 						item a= new item(currentID,itemlist[currentID]);
 						currentID++;
 						i.addItems(a);	
 						}
-					this.robot.move(this.robot.getXcord-i.getX,this.robot.getYcord-i.getY);
+					this.robot.move(i.getX,i.getY);
 					this.robot.dropshelf();
 						
 				}
