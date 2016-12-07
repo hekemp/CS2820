@@ -6,10 +6,10 @@ package production;
  */
 import java.util.ArrayList;
 public class Floor implements viewFloor,robotPath {
-	int size = 7;
+	int size = 7; //initailize floor size to be 7x7
 	ArrayList<Point> belt = new ArrayList<>();
-	ArrayList<Point> sPoint = new ArrayList<>();
-	Shelf[] shelf = new Shelf[4];
+	ArrayList<Point> sPoint = new ArrayList<>(); // the list of shelfs' point
+	Shelf[] shelf = new Shelf[4]; // array contain all shelf objects
 	Point packer;
 	Point picker;
 	Point receving;
@@ -17,6 +17,9 @@ public class Floor implements viewFloor,robotPath {
 	Point shipping;
 	
 	//Initializing the floor
+	public Floor(){
+		this(7);
+        }
 	public Floor(int floorsize){
 		size = floorsize;
 		// initialize the belt location
@@ -72,7 +75,7 @@ public class Floor implements viewFloor,robotPath {
 	}
 	
 	// the list of points for robot from p1 to p2
-	private ArrayList<Point> route = new ArrayList<>();
+	private ArrayList<Point> route;
     /**
      * @auther Xinyu Qian
      * @param p1 start point
@@ -80,6 +83,7 @@ public class Floor implements viewFloor,robotPath {
      * @return the ArrayList of points from p1 to p2
      */
 	public ArrayList<Point> getRoute(Point p1, Point p2){
+		route = new ArrayList<>();
         int move = Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);
         for(int i=0; i< move-1;i++){
             if(p1.x - p2.x > 1){
