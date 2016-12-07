@@ -5,7 +5,7 @@ package production;
  * @author Xinyu Qian
  */
 import java.util.ArrayList;
-public class Floor implements viewFloor,robotPath {
+public class Floor implements viewFloor,robotPath, Event {
 	int size = 7; //initailize floor size to be 7x7
 	ArrayList<Point> belt = new ArrayList<>();
 	ArrayList<Point> sPoint = new ArrayList<>(); // the list of shelfs' point
@@ -111,6 +111,19 @@ public class Floor implements viewFloor,robotPath {
         }
         route.add(p2);
         return route;
+	}
+	@Override
+	public Event getEvent(){
+		return (Event)this;
+	}
+	@Override
+    public void performAction(String Method) {
+         
+    }
+
+    @Override
+    public String getPara() {
+         return "";
     }
 	/**@author yunfjiang
 	 * to return a list of all shelf
