@@ -28,9 +28,20 @@ public class MockOrder implements Event {
   }
   
   public Event getEvent(){
+    if (myEvents.isEmpty()){
+      return Event(this);
+    {
+    else{
+      return myEvents.remove();{
   }
   
   public String getPara(){
+    if (myParameters.isEmpty()){
+      return " "
+    }
+    else{
+      return myParameters.remove();
+    }
   }
   
   public void recieveOrder(){
