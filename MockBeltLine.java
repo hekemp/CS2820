@@ -10,9 +10,6 @@
 
 public class MockBelt implements Event{
 	
-	/**
-	 * Constructor initializes nothing, as everything is handled in the mock methods.
-	 */
    
    int myX;
    int myY;
@@ -34,7 +31,22 @@ public class MockBelt implements Event{
 	 * @input - a string which contains a method name/key and parameters, seperated by commas
 	 */
 	public void performAction(String Method){
-	    System.out.println("Belt did something.");
+	    if (myX == 0 && myY == 0)
+	    	{}
+	    else{
+		if(myX != 0)
+			{tempX = myX;
+			myX = myX - 1;
+			System.out.println(item + " moved from: " + String.valueOf(tempX) + " to " + String.valueOf(myX);
+		        myEvents.add((Event) this);
+		        myParameters = " ";}
+		else
+			{tempY = myY;
+			myY = myY - 1;
+			System.out.println(item + " moved from: " + String.valueOf(tempY) + " to " + String.valueOf(myY);
+			myEvents.add((Event) this);
+			myParameters = " ";}
+	    }
 	}
 	
 	/**
