@@ -34,6 +34,7 @@ public class Visualizer implements Event{
  * print out the basic information
  */
    Floor x=new Floor(7);
+   int count=0;
    
   public Visualizer(){setup();}//default initializer
   
@@ -112,15 +113,10 @@ public class Visualizer implements Event{
 	 */
 	
 	 public void performAction(String Method){
-            String[] Action=Method.split(",");
             
-         if (Method=="setup"){
-             setup();
+             tick(count);
+             count++;
          }
-         if (Action[0]=="tick"){
-             int number=Integer.parseInt(Action[1]);
-             tick(number);
-         }}
                 
 	
 	/**
