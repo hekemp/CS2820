@@ -1,12 +1,17 @@
 package production;
 // interface for visualizer
+/**
+ *
+ * @author Xinyu Qian
+ */
+import java.util.ArrayList;
 public interface viewFloor {
-	public ArrayList getBelt();
-	public ArrayList getShelf();
-	public Point getPacker();
-	public Point getPicker();
-	public Point getReceving();
-	public Point getCharger();
-	public Point shipping();
-	public int floorSize();
+	ArrayList<Point> getBelt();
+	ArrayList<Point> getShelf();
+	Point getPacker();
+	Point getPicker();
+	Point getReceving();
+	Point getCharger();
+	Point shipping();
+	int floorSize();
 }
