@@ -14,9 +14,14 @@ public class MockOrder implements Event {
   
   Robot myRobot;
   Belt myBelt;
+  private ArrayList<Event> myEvents;
+  private ArrayList<String> myParameters;
+  
   public MockOrder(Robot newRobot, Belt newBelt){
     myRobot = newRobot;
     myBelt = newBelt;
+    myEvents = new ArrayList<Event>();
+    myParameters = new ArrayList<Event>();
   }
   
   public void performAction(String Method){
@@ -26,6 +31,9 @@ public class MockOrder implements Event {
   }
   
   public String getPara(){
+  }
+  
+  public void recieveOrder(){
   }
   
 }
