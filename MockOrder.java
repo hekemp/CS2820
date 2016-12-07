@@ -9,3 +9,19 @@ import java.util.*;
  * It manages instances of the Belt and Robot in order to execute calls to these methods.
  *
  */
+
+public class MockOrder implements Event {
+  
+  public MockOrder(){
+  }
+  
+  public void performAction(String Method){
+  }
+  
+  public Event getEvent(){
+  }
+  
+  public String getPara(){
+  }
+  
+}
