@@ -57,8 +57,8 @@ public class Master
     public void addShelf(Shelf newShelf){
 	    myShelf = newShelf;
     }
-	
-    public void addVisualizer(Visualizer myVisualizer){
+    // debugging by Xinyu Qian
+    public void addVisualizer(Visualizer newVisualizer){
 	    myVisualizer = newVisualizer;
     }
     
