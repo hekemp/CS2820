@@ -19,13 +19,12 @@ public class Belt implements Event{
     Bin bin;
     Order order;
     item item;
-    Package packages;
     PriorityQueue<Event> beltEvents;
-	PriorityQueue<String> beltParameters;
+    PriorityQueue<String> beltParameters;
     
     
     LinkedList belt = new LinkedList();
-    ArrayList<Object> Dock = new 	ArrayList<Object>();
+    ArrayList<Object> Dock = new ArrayList<Object>();
     
     public Belt(Floor f){
     	this.floor = f;
@@ -47,8 +46,13 @@ public class Belt implements Event{
     	return item;
     }
     
+    public Package getPackage(){
+    	Package pack = new Package();
+    	return pack;
+    }
+    
     public itemPackage getItemPackages(){
-		return new itemPackage(getItem(), packages);
+		return new itemPackage(getItem(), getPackage());
 	}
     
     public itemBin getItemBin(){
@@ -117,7 +121,7 @@ public class Belt implements Event{
     	}
     	
     	public itemPackage combine(item item, Package packages){
-    		return new itemPackage(getItem(), packages);
+    		return new itemPackage(getItem(), getPackage());
     	}
     	
     	
@@ -125,7 +129,7 @@ public class Belt implements Event{
     
     
     @Override
-    public void performAction(String Method){                                  //Robot's implementation referance
+    public void performAction(String Method){                                  //Robots implementation referance
     	String[] action = Method.split(",");
     	List<String> doAction = new ArrayList<String>(Arrays.asList(action));   
     	if("moveBelt".equals(doAction.get(0))){
@@ -160,3 +164,6 @@ public class Belt implements Event{
 		}
 	}
      
+
+   
+}
