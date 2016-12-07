@@ -113,7 +113,7 @@ public class inventory implements Event{
 			for (Shelf i:myshelf){
 				if (!i.full()){	
 					this.robot.move(i.getX(),i.getY());
-					this.robot.pickShelf();
+					this.robot.pickShelf(i); // add i into pickShelf() by Xinyu Qian
 					this.robot.move(this.floor.getReceving().x,this.floor.getReceving().y);
 					while(!i.full()){
 						item a= new item(currentID,itemlist[currentID]);
