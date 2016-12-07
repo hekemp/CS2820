@@ -31,7 +31,7 @@ public class inventory implements Event{
 		totalnum=0;
 		for (int z=0;z<itemlist.length&&z<maxinventory;z++){
 			item a= new item(currentID,itemlist[z]);    
-			placeitemtoshelf(item x);
+			placeitemtoshelf(a);  // This line modified by Xinyu Qian, changed (item x) to (a)
 			currentID++;
 			totalnum++;
 			System.out.println("item with ID"+currentID+"has been added to shelf");
@@ -40,6 +40,7 @@ public class inventory implements Event{
 		}
 		/**
 		 * @author Yunfan Jiang
+		 * @author Xinyu Qian, Just add a few corrections
 		 * @param product
 		 * find the location of ONE of the many items with order description
 		 */
@@ -50,15 +51,18 @@ public class inventory implements Event{
 		 * to avoid calling a moving shelf
 		 */
 		for (Shelf j:this.myshelf){ 
-			for (item i:j){
+			for (item i:j.Item){ // Modified by Xinyu Qian, just debugging
 				if(i.type==product){
-					System.out.println("item is located at Shelf"+j);
+					System.out.println("item is located at Shelf"+ (j.y - 2));  // Modified by Xinyu Qian, just debugging
 					return i.getplace();
 					
 				}
 					
 			}
-		}	
+		}
+		// Modified by Xinyu Qian, add a return statement if cannot find this item from shelves
+		System.out.println("This item is sold out.");
+                return null;
 	}
 		
 		/**@author Yunfan
