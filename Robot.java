@@ -197,9 +197,6 @@ public class Robot extends Production implements Event{
                     int y = Integer.valueOf(doAction.get(2));
                     this.move(x,y);
                 }
-                if("pickShelf".equals(doAction.get(0))){
-                    pickShelf();
-                }
 		if("dropShelf".equals(doAction.get(0))){
 		    dropShelf();
 		}
