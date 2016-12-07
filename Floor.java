@@ -32,16 +32,16 @@ public class Floor implements viewFloor,robotPath, Event {
 			sPoint.add(new Point(4,i));
 			shelf[i-2] = new Shelf(sPoint.get(i-2));
 		}
-		packer = new Point(1,1);
+		packer = new Point(1,3);
 		packer.packer = true;
 		
-		picker = new Point(1,size-2);
+		picker = new Point(1,size-1);
 		picker.picker = true;
 		
 		receving = new Point(size-2, size);
 		receving.receving = true;
 		
-		charger = new Point(2,size-1);
+		charger = new Point(size-1,0);
 		charger.charger = true;
 		
 		shipping = new Point(0,0);
