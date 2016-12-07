@@ -16,7 +16,7 @@ public class Production
         inventory newInventory = new inventory();
         Order newOrder = new Order(String asdf ,String asxcv ,String zxcvb, int p, OrderItem[] orderutemsdfg);
         Shelf newShelf = new Shelf();
-        Robot newRobot = new Robot(newFloor,newShelf,0,0,1);
+        Robot newRobot = new Robot(newFloor,newShelf,2,2,100);
         Visualizer newVisualizer = new Visualizer();
         
         Master myMaster = new Master();
