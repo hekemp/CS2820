@@ -76,20 +76,6 @@ public class Robot extends Production implements Event{
             return n;
         }
         
-        public void getNextPoint(){
-            this.location = robotRoute.get(0);
-            robotRoute.remove(0);
-            for (int i = 1; i<robotRoute.size(); i++){
-                robotEvents.add(this);
-                robotParameters.add("move," + robotRoute.get(i).getX() + "," + robotRoute.get(i).getY());
-                if (shelf == true){
-                    robotParameters.add("moveShelf" + robotRoute.get(i).getX() + "," + robotRoute.get(i).getY());
-                }
-                System.out.println("New move enqueued");
-            }
-            
-        }
-        
         //check where the robot is within a route
         //How does a robot know when it gets to a shelf or a picking station?
         public void taskStatus(){
@@ -113,15 +99,21 @@ public class Robot extends Production implements Event{
             }
         }
         
+        /**
+         * 
+         * @param task 
+         */
         public void assignTask(String task){
             if(task.equals("toShelf")){
                 robotTask = task;
                 robotRoute = myFloor.getRoute(getLocation(), myShelf.getlocation());
+                robotParameters.add("move," + String.valueOf(robotRoute.get(0).getX()) + "," + String.valueOf(robotRoute.get(0).getY()));
                 System.out.println("Robot received new route to shelf.");
             }
             if(task.equals("toPicker")){
                 robotTask = task;
                 robotRoute = myFloor.getRoute(getLocation(), myFloor.getPicker());
+                robotParameters.add("," + "move," + String.valueOf(robotRoute.get(0).getX()) + String.valueOf(robotRoute.get(0).getY()));
                 System.out.println("Robot received new route to picker.");
             }
             if(task.equals("toCharger")){
@@ -152,6 +144,20 @@ public class Robot extends Production implements Event{
 		System.out.println("Robot: " + String.valueOf(robotId) + " has moved: " + String.valueOf(xCoord) + String.valueOf(yCoord));
 		taskStatus();
 	}
+        
+        public void getNextPoint(){
+            this.location = robotRoute.get(0);
+            robotRoute.remove(0);
+            for (int i = 1; i<robotRoute.size(); i++){
+                robotEvents.add(this);
+                robotParameters.add("move," + String.valueOf(robotRoute.get(i).getX()) + "," + String.valueOf(robotRoute.get(i).getY()));
+                if (shelf == true){
+                    robotParameters.add("moveShelf" + robotRoute.get(i).getX() + "," + robotRoute.get(i).getY());
+                }
+                System.out.println("New move enqueued");
+            }
+            
+        }
 
 	/**
 	* @author Rachel Schneberger
