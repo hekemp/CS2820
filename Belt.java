@@ -1,112 +1,162 @@
+
 package production;
 
 import java.util.*;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * @author Mouna Elkeurti
- * @param belt variable that indicate which cell in belt the Objects are.
- * @param moving variable to check if the belt is moving. 
+ * 
  * Belt class moves bins in the belt from picker to packer.
  * At packer location, the belt is stopped and a packer grab a package
  * and add it to the belt and goes to the shipping dock
  */
 
-public class Belt implements Event {
-
-    int belt = 0;         
-    boolean moving;       
+public class Belt implements Event{
+   
+    boolean moving; 
+    int size;
     Floor floor;
     Bin bin;
     Order order;
+    item item;
     Package packages;
+    PriorityQueue<Event> beltEvents;
+	PriorityQueue<String> beltParameters;
     
-    Queue Bin  = new LinkedList();     //Queue that holds bins used for belt
-    Queue Package = new LinkedList();  //Queue that hols package that are need to package the items
-    Queue item = new LinkedList();     //Queue that holds the items in order on the belt
- 
-    /**
-     * @author Mouna Elkeurti
-     * Belt constructor that set the belt cell (belt variable) to 0 
-     * to keep track of where bins/item and package are on belt
-     */
+    
+    LinkedList belt = new LinkedList();
+    ArrayList<Object> Dock = new 	ArrayList<Object>();
     
     public Belt(Floor f){
     	this.floor = f;
-    	belt =0;
     	moving = false;
     	
-    }
-    
-    // populating an initial Queue for bins
-    public void populateBin(){
-    	Bin.offer(bin);Bin.offer(bin);Bin.offer(bin);
-    	Bin.offer(bin);Bin.offer(bin);Bin.offer(Bin);
-    	Bin.offer(bin);
-    	
+    	for(int i=0; i<size; i++){
+    		Bin b = new Bin();
+    		belt.add(b);
     	}
-    
-    // Populating an intial Queue for packages
-    public void popoluatePackage(){
-    	Package.offer(packages);Package.offer(packages);Package.offer(packages);
-    	Package.offer(packages);Package.offer(packages);Package.offer(packages);
-    	Package.offer(packages);
     }
     
-    // Populate an intial Queue fro items
-    public void populateItem(){
-    	item.offer(item);item.offer(item);item.offer(item);
-    	item.offer(item);item.offer(item);item.offer(item);
-    	item.offer(item);
+    public Bin getBin(){
+  	  Bin bin = new Bin();
+  	  return bin;
     }
     
-    /**
-     * @author Mouna Elkeurti
-     */
+    public item getItem(){
+    	item item = new item();
+    	return item;
+    }
+    
+    public itemPackage getItemPackages(){
+		return new itemPackage(getItem(), packages);
+	}
+    
+    public itemBin getItemBin(){
+		return new itemBin(getBin(),getItem());
+	}
+    
     public void moveBelt(){
-    	while( Bin.isEmpty() == false && Package.isEmpty() == false){
-    		Bin.peek();
-    		item.peek();
-    		Bin.offer(bin);
-    		item.offer(item);
-    		belt++;
-    		if (belt ==4){
-    			moving =false;
-    			pack();
+    	belt.set(0, getItemBin());
+    	belt.removeLast();
+    	while(belt.isEmpty() == false){
+    		belt.addFirst(getItemBin());
+    		belt.removeLast();
+    		for(int i= 0; i<belt.size(); i++){
+    			if( i == size/2 && belt.get(size/2) == getItemBin()){
+    				doPackage();
     			}
-    		if (belt == 7){
-    		belt =0;
+    		}
+    		while(belt.removeLast() == getItemPackages()){
+    			addToDock();
+    			beltParameters.add("A packaged item is dropped off from belt and added to dock");
     		}
     		
+    	}
     	moving = true;
+    }
+    
+    public void doPackage(){
+    	belt.set(size/2,getItemPackages());
+    	moving = false;
+    }
+    
+    public void addToDock(){
+    	this.Dock.add(belt.removeLast());
+    	beltEvents.add(this);
+    	
+    }
+    
+    
+   
+    public class itemBin{
+    	
+    	Bin bin;
+    	item item;
+    	
+    	public itemBin(Bin bin, item item){
+    		this.bin = bin;
+    		this.item = item;
+    		
+    	}
+    	
+    	public itemBin combine(Bin bin, item item){
+    		
+    		return new itemBin(bin, item);
     	}
     	
     }
     
-    /**
-     * @author Mouna Elkeurti
-     */
-    public void pack(){
-    	while(Package.isEmpty()==false && belt == 4){
-    		Package.peek();
-    		moving = false;
+    public class itemPackage{
+    	item item;
+    	Package packages;
+    	
+    	public itemPackage(item item,Package packages){
+    		this.item = item;
+    		this.packages = packages;
+    		
     	}
-    	Package.peek();
+    	
+    	public itemPackage combine(item item, Package packages){
+    		return new itemPackage(getItem(), packages);
+    	}
+    	
+    	
     }
     
-    public void performAction(String Method){
-        System.out.println("Belt is moving");
+    
+    @Override
+    public void performAction(String Method){                                  //Robot's implementation referance
+    	String[] action = Method.split(",");
+    	List<String> doAction = new ArrayList<String>(Arrays.asList(action));   
+    	if("moveBelt".equals(doAction.get(0))){
+            this.moveBelt();
+        }
+        if("doPackage".equals(doAction.get(0))){
+            this.doPackage();
+        }
+        if("addToDock".equals(doAction.get(0))){
+            this.addToDock();
+        }
+        
     }
 	
-	
-    public Event getEvent(){ // not implemented yet
-	   
+	@Override
+    public Event getEvent(){ 
+		if(beltEvents.isEmpty()){
+			return(Event) new Belt(floor);
+			}
+		else{
+			return beltEvents.remove();
+            }
     }
     
-    public String getPara(){ // not implemented yet
-    }
-    
-
-   
-}
+	@Override
+    public String getPara(){
+		if(beltParameters.isEmpty()){
+			return "empty";
+		}
+		else{
+			return beltParameters.remove();
+		}
+	}
+     
