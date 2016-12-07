@@ -45,6 +45,18 @@ public class Robot extends Production implements Event{
                 this.location = new Point(xCoord, yCoord);
 		robotId = id;
 	}
+	/**
+	*@auther Xinyu Qian 
+	* if you think this suggestion is not helpful just delete it
+	public Robot(Floor floor, Shelf shelf, int id){
+		xCoord = shelf.x;
+		yCoord = shelf.y;
+                myFloor = floor;
+                myShelf = shelf;
+                this.location = new Point(xCoord, yCoord);
+		robotId = id;
+	}
+	*/
 	
         /**
          * @author Rachel Schneberger
