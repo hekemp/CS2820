@@ -15,8 +15,8 @@ public class Production
         Floor newFloor = new Floor();
         inventory newInventory = new inventory();
         Order newOrder = new Order(String asdf ,String asxcv ,String zxcvb, int p, OrderItem[] orderutemsdfg);
-        Robot newRobot = new Robot(0,0,1,100);
         Shelf newShelf = new Shelf();
+        Robot newRobot = new Robot(newFloor,newShelf,0,0,1);
         Visualizer newVisualizer = new Visualizer();
         
         Master myMaster = new Master();
