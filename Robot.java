@@ -44,6 +44,14 @@ public class Robot implements Event{
 		robotCharge = charge;
 	}
 	
+	/**
+	 * @author Heather Kemp
+	 * returns the robot ID
+	 */
+	
+	public int getID(){
+		return this.robotId;
+	}
         /**
          * @author Rachel Schneberger
          * returns a Point with location of robot
