@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
-import production.Floor;
-import production.Point;
 
 /**
 * @author Rachel Schneberger
@@ -107,19 +105,24 @@ public class Robot extends Production implements Event{
             if(task.equals("toShelf")){
                 robotTask = task;
                 robotRoute = myFloor.getRoute(getLocation(), myShelf.getlocation());
+		System.out.println("Robot received new route to shelf.");    
                 robotParameters.add("move," + String.valueOf(robotRoute.get(0).getX()) + "," + String.valueOf(robotRoute.get(0).getY()));
-                System.out.println("Robot received new route to shelf.");
+                getNextPoint();
             }
             if(task.equals("toPicker")){
                 robotTask = task;
                 robotRoute = myFloor.getRoute(getLocation(), myFloor.getPicker());
-                robotParameters.add("," + "move," + String.valueOf(robotRoute.get(0).getX()) + String.valueOf(robotRoute.get(0).getY()));
-                System.out.println("Robot received new route to picker.");
+		System.out.println("Robot received new route to picker.");
+                robotParameters.add("move," + String.valueOf(robotRoute.get(0).getX()) + String.valueOf(robotRoute.get(0).getY()));
+                getNextPoint();
+                
             }
             if(task.equals("toCharger")){
                 robotTask = task;
                 robotRoute = myFloor.getRoute(getLocation(), myFloor.getCharger());
-                System.out.println("Robot received new route to charger");
+                System.out.println("Robot received new route to charger");		    
+		robotParameters.add("move," + String.valueOf(robotRoute.get(0).getX()) + String.valueOf(robotRoute.get(0).getY()));  
+                getNextPoint();
             }
         }
         
