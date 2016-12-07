@@ -173,14 +173,19 @@ public class Robot implements Event{
 	}
 	/**
 	* @author Rachel Schneberger
+	* @author Heather Kemp
 	*/
-	public void pickShelf(){
+	public void pickShelf(Shelf newShelf){
 		//wait one clock tick before picking up and moving....we are not implementing tick..
 		shelf = true;
+		this.shelfLocation = newShelf.location;
+		
+		
 	}
         
         public void dropShelf(){
             this.shelf = false;
+	    this.shelfLocation = null;
         }
 	
 	@Override
