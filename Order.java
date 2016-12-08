@@ -41,6 +41,7 @@ public class Order{
 		orderItemList.add(e);}
 	}
 	
+	
 	public void itemremoving(OrderItem e){
 		orderItemList.remove(e);
 		
@@ -57,17 +58,23 @@ public class Order{
 		
 	}
 	
-	
+	public Integer date(){return orderNumber;}
 	
 	public String showAddress() { return address; }
   	public OrderItem[] getOrderItems() { return orderitems; }
 	public String getProgress(){
 		return progress;}
-	public String shippeddate(){return dateRecieved;}
-	public Integer OrderNumber(return orderNumber;)
 
-
-	
-	
-	
+	public String showinfo(){
+		String info = "";
+		info += "address:\n" + address + "\nOrder Number: " + orderNumber + "\n" + "progress:\n"+progress +"dateReceived\n"+dateReceived ;
+		return info;
+	}
 }
+	
+	
+	
+	
+	
+	
+	
