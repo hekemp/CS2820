@@ -15,14 +15,7 @@ public class Order implements Event {
 	boolean isFilled;
 	OrderItem[] orderitems;
 	
-	ArrayList<item>orderItemstatus;
-	
-	/**
-	 * @author Mouna Elkeurti
-	 * Default constructor needed for belt
-	 */
-	
-	public Order(){}
+	ArrayList<item>orderItemList;
 	
 	public Order(String progress,String address, String dateReceived,int orderNumber, OrderItem[] items){
 		progress=progress;
@@ -30,7 +23,7 @@ public class Order implements Event {
 		dateReceived=dateReceived;
 		this.orderNumber=orderNumber;
 		orderitems=items;
-		this.orderItemstatus= orderItemstatus;
+		this.orderItemList= orderItemList;
 		
 	}
 	
@@ -43,17 +36,18 @@ public class Order implements Event {
 	return null; // if no needed OrderItem can be found
    	 }
 	
-	public void itemadding(item o) {
-		orderItemstatus.add(o);
+	public void itemadding(OrderItem e) {
+		if(e.inBin){
+		orderItemList.add(e);}
 	}
 	
-	public void itemremoving(item o){
-		orderItemstatus.remove(o);
+	public void itemremoving(OrderItem e){
+		orderItemList.remove(e);
 		
 	}
 	
-	public boolean itemcontaining(item o){
-		if (orderItemstatus.contains(o)){
+	public boolean itemcontaining(OrderItem e){
+		if (orderItemList.contains(e)){
 			return true;
 		}
 		else{
@@ -67,14 +61,10 @@ public class Order implements Event {
 	
 	public String showAddress() { return address; }
   	public OrderItem[] getOrderItems() { return orderitems; }
-	public void cancel(){}
-	
-	public void returningprocess(){	}
-	
 	public String getProgress(){
-		return progress;
-		
-	}
+		return progress;}
+	public String shippeddate(){return dateRecieved}
+
 
 	@Override
 	public void performAction(String Method) {
