@@ -31,7 +31,7 @@ public class MockOrder implements Event {
     myFloor = newFloor;
     myEvents = new ArrayList<Event>();
     myParameters = new ArrayList<Event>();
-    myInventory = new newInventory;
+    myInventory = newInventory;
   }
   
   public void performAction(String Method){
@@ -46,7 +46,7 @@ public class MockOrder implements Event {
       return Event(this);
     {
     else{
-      return myEvents.remove();{
+      return myEvents.remove();}
   }
   
   public String getPara(){
