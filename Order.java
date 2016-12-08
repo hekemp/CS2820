@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author hyo kyung kang also credited to prof Ted Herman
  *
  */
-public class Order implements Event {
+public class Order{
 	String progress;
 	String address;
 	String dateReceived;
@@ -67,19 +67,7 @@ public class Order implements Event {
 	public Integer OrderNumber(return orderNumber;)
 
 
-	@Override
-	public void performAction(String Method) {
-			}
-
-	@Override
-	public Event getEvent() {
-		return (Event)this;
-	}
-
-	@Override
-	public String getPara() {
-		return "";
-	}
+	
 	
 	
 }
