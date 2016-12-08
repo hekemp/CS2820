@@ -40,13 +40,13 @@ public class MockBeltLine implements Event{
 		if(myX != 0)
 			{int tempX = myX;
 			myX = myX - 1;
-			System.out.println(item + " moved from: " + String.valueOf(tempX) + " to " + String.valueOf(myX));
+			System.out.println(myItem + " moved from: " + String.valueOf(tempX) + " to " + String.valueOf(myX));
 		        myEvents.add((Event) this);
 		        myParameters = " ";}
 		else
 			{int tempY = myY;
 			myY = myY - 1;
-			System.out.println(item + " moved from: " + String.valueOf(tempY) + " to " + String.valueOf(myY));
+			System.out.println(myItem + " moved from: " + String.valueOf(tempY) + " to " + String.valueOf(myY));
 			myEvents.add((Event) this);
 			myParameters = " ";}
 	    }
