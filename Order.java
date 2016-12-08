@@ -63,7 +63,8 @@ public class Order implements Event {
   	public OrderItem[] getOrderItems() { return orderitems; }
 	public String getProgress(){
 		return progress;}
-	public String shippeddate(){return dateRecieved}
+	public String shippeddate(){return dateRecieved;}
+	public Integer OrderNumber(return orderNumber;)
 
 
 	@Override
