@@ -99,11 +99,11 @@ public class Master
       String newPara = myParameters.remove(0);
       if(newPara != "Null")
       {newEvent.performAction(newPara);
-       boolean obtainingEvents = true;
+       boolean obtainingEvents = True;
        while(obtainingEvents)
        {currentParameter = newEvent.getPara();
 	if(currentParameter == " "){
-		obtainingEvents = false
+		obtainingEvents = False;
 	}
 	else{
 		myEvents.add(newEvent.getEvent());
