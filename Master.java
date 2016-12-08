@@ -95,7 +95,7 @@ public class Master
       {newEvent.performAction(newPara);
        boolean obtainingEvents = true;
        while(obtainingEvents)
-       {currentParameter = newEvent.getPara();
+       {String currentParameter = newEvent.getPara();
 	  if(currentParameter == " "){
 		obtainingEvents = false;
 	  }
