@@ -83,8 +83,7 @@ public class Master
      * Run simulation. This code creates instances of all of the types of objects. It also executes very simple
      * commands to each event to start the cycle of events for the day.
      *
-	 */
-    public void runSimulation()
+	 */    public void runSimulation()
     {
      this.addEvent((Event) myMockOrder,"recieveOrder");
      this.addEvent((Event) myMockOrder,"pickUpShelf");
@@ -97,16 +96,16 @@ public class Master
        boolean obtainingEvents = True;
        while(obtainingEvents)
        {currentParameter = newEvent.getPara();
-	if(currentParameter == " "){
+	  if(currentParameter == " "){
 		obtainingEvents = False;
-	}
-	else{
+	  }
+	  else{
 		myEvents.add(newEvent.getEvent());
 		myParameters.add(currentParameter);
-	}
-	}
+	   }
+	   }
      }
      
     }
-    
+}
 }
