@@ -17,10 +17,10 @@ class Shelf{
 	boolean iffull=false;
 	
 	public Shelf(Point P){
-		this.x = P.x;
-		this.y = P.y;
+		x = P.x;
+		y = P.y;
 		P.shelf = true;
-		this.location =P;
+		location =P;
 	}
 	
 	public String addItems(item I){
