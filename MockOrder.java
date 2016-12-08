@@ -35,6 +35,10 @@ public class MockOrder implements Event {
   }
   
   public void performAction(String Method){
+    if(Method == "recieveOrder")
+      this.recieveOrder();
+    if(Method == "pickUpShelf")
+      this.pickUpShelf();
   }
   
   public Event getEvent(){
@@ -74,7 +78,7 @@ public class MockOrder implements Event {
     myParameters.add(robotMove);
     myBelt = new MockBeltLine(myFloor.getPicker().x,myFloor.getPicker().y,"pen");
     myEvents.add(Event(myBelt));
-    myParameters.add(" ");
+    myParameters.add("moveBelt,");
     myEvents.add(Event(myRobot));
     String robotMove2 = "move," + String.valueOf(originalX) + "," + String.valueOf(originalY);
     myParameters.add(robotMove2);
