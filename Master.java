@@ -24,6 +24,7 @@ public class Master
     private Robot myRobot;
     private Shelf myShelf;
     private Visualizer myVisualizer;
+    private MockOrder myMockOrder;
     
 
     /**
@@ -61,6 +62,10 @@ public class Master
     public void addVisualizer(Visualizer newVisualizer){
 	    myVisualizer = newVisualizer;
     }
+	
+    public void addMockOrder(MockOrder newMockOrder){
+    	     myMockOrder = newMockOrder;
+    }
     
      /**
      * Add an event. This code allows us to add to both queues at the same time, and if an item has a Master object
@@ -94,8 +99,17 @@ public class Master
       String newPara = myParameters.remove(0);
       if(newPara != "Null")
       {newEvent.performAction(newPara);
-      myEvents.add(newEvent.getEvent());
-      myParameters.add(newEvent.getPara());}
+       boolean obtainingEvents = true;
+       while(obtainingEvents)
+       {currentParameter = newEvent.getPara();
+	if(currentParameter == " "){
+		obtainingEvents = false
+	}
+	else{
+		myEvents.add(newEvent.getEvent());
+		myParameters.add(currentParameter);
+	}
+	}
      }
      
     }
