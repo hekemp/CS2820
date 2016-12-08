@@ -17,54 +17,54 @@ public class Master
     
     private ArrayList<Event> myEvents;
     private ArrayList<String> myParameters;
-    private Belt myBelt;
+    //private Belt myBelt;
     private Floor myFloor;
     private inventory myInventory;
-    private Order myOrder;
+    //private Order myOrder;
     private Robot myRobot;
     private Shelf myShelf;
-    private Visualizer myVisualizer;
+    //private Visualizer myVisualizer;
     private MockOrder myMockOrder;
     
 
     /**
      * Constructor initializes the queues for the events
-	 */
+     */
     public Master()
     {myEvents = new ArrayList<Event>();
      myParameters = new ArrayList<String>();
     }
     
-    public void addBelt(Belt newBelt){
-	    myBelt = newBelt;
-    }
+   // public void addBelt(Belt newBelt){
+    //    myBelt = newBelt;
+   // }
 
     public void addFloor(Floor newFloor){
-	    myFloor = newFloor;
+        myFloor = newFloor;
     }
-	
+    
     public void addInventory(inventory newInventory){
-	    myInventory = newInventory;
+        myInventory = newInventory;
     }
 
-    public void addOrder(Order newOrder){
-	    myOrder = newOrder;
-    }
+    //public void addOrder(Order newOrder){
+    //    myOrder = newOrder;
+   // }
 
     public void addRobot(Robot newRobot){
-	    myRobot = newRobot;
+        myRobot = newRobot;
     }
-	
+    
     public void addShelf(Shelf newShelf){
-	    myShelf = newShelf;
+        myShelf = newShelf;
     }
     // debugging by Xinyu Qian
-    public void addVisualizer(Visualizer newVisualizer){
-	    myVisualizer = newVisualizer;
-    }
-	
+  //  public void addVisualizer(Visualizer newVisualizer){
+    //    myVisualizer = newVisualizer;
+  //  }
+    
     public void addMockOrder(MockOrder newMockOrder){
-    	     myMockOrder = newMockOrder;
+             myMockOrder = newMockOrder;
     }
     
      /**
@@ -73,7 +73,7 @@ public class Master
      *
      * @input newEvent - an Event type object for which to execute a method on
      * @input parameters - a String object which contains the internal method to execute and any parameters
-	 */
+     */
     public void addEvent(Event newEvent, String parameters)
     {myEvents.add(newEvent);
      myParameters.add(parameters);
@@ -83,27 +83,33 @@ public class Master
      * Run simulation. This code creates instances of all of the types of objects. It also executes very simple
      * commands to each event to start the cycle of events for the day.
      *
-	 */    public void runSimulation()
+     */
+    public void runSimulation()
     {
      this.addEvent((Event) myMockOrder,"recieveOrder");
      this.addEvent((Event) myMockOrder,"pickUpShelf");
-     
      while(!myEvents.isEmpty())
-     {Event newEvent = myEvents.remove(0);
+     {
+         Event newEvent = myEvents.remove(0);
       String newPara = myParameters.remove(0);
-      if(newPara != "Null")
-      {newEvent.performAction(newPara);
+      
+      if(newPara != null & newEvent != null)
+      {
+
+
+          newEvent.performAction(newPara);
        boolean obtainingEvents = true;
        while(obtainingEvents)
-       {String currentParameter = newEvent.getPara();
-	  if(currentParameter == " "){
-		obtainingEvents = false;
-	  }
-	  else{
-		myEvents.add(newEvent.getEvent());
-		myParameters.add(currentParameter);
-	   }
-	   }
+       { String currentParameter = newEvent.getPara();
+         //  System.out.println(currentParameter);
+      if(currentParameter == " " || currentParameter == null){
+        obtainingEvents = false;
+      }
+      else{
+        myEvents.add(newEvent.getEvent());
+        myParameters.add(currentParameter);
+       }
+       }
      }
      
     }
