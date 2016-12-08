@@ -1,4 +1,5 @@
 package production;
+ 
 
 import java.util.*;
 
@@ -30,7 +31,7 @@ public class MockOrder implements Event {
     robotY = newRobot.getYcord();
     myFloor = newFloor;
     myEvents = new ArrayList<Event>();
-    myParameters = new ArrayList<Event>();
+    myParameters = new ArrayList<String>();
     myInventory = newInventory;
   }
   
@@ -43,10 +44,10 @@ public class MockOrder implements Event {
   
   public Event getEvent(){
     if (myEvents.isEmpty()){
-      return Event(this);
+      return (Event)this;
     }
     else{
-      return myEvents.remove();}
+      return myEvents.remove(0);}
     }
   
   public String getPara(){
@@ -54,15 +55,15 @@ public class MockOrder implements Event {
       return " ";
     }
     else{
-      return myParameters.remove();
+      return myParameters.remove(0);
     }
   }
   
   public void recieveOrder(){
     System.out.println("Order recieved for: Pen");
-    myShelf = myInventory.finditem("pen");
-    System.out.println("Scheduling robot" + String.valueOf(myRobot.getID()) + " to go pick up shelf with: Pen.");
-    myEvents.add(Event(myRobot));
+    myShelf = new Shelf(new Point(0, 5));
+    System.out.println("Scheduling robot" + String.valueOf(myRobot.getID()) + " to go pick up shelf with: Pen. (0,5)");
+    myEvents.add((Event)myRobot);
     originalX = myShelf.x;
     originalY = myShelf.y;
     String robotMove = "move," + String.valueOf(myShelf.x) + "," + String.valueOf(myShelf.y);
@@ -70,23 +71,23 @@ public class MockOrder implements Event {
   }
   
   public void pickUpShelf(){
-    System.out.println("Robot " +  String.valueOf(myRobot.getID()) + " is picking up the shelf with: Pen.");
+    
     myRobot.pickShelf(myShelf);
-    System.out.println("Robot " + String.valueOf(myRobot.getID()) + " is moving to the picker.");
-    myEvents.add(Event(myRobot));
+    System.out.println("Robot " + String.valueOf(myRobot.getID()) + " is scheduling to move to the picker. (" + String.valueOf(myFloor.getPicker().x) + "," + String.valueOf(myFloor.getPicker().y) + ")");
+    myEvents.add((Event)myRobot);
     String robotMove = "move," + String.valueOf(myFloor.getPicker().x) + "," + String.valueOf(myFloor.getPicker().y);
     myParameters.add(robotMove);
     myBelt = new MockBeltLine(myFloor.getPicker().x,myFloor.getPicker().y,"pen");
-    myEvents.add(Event(myBelt));
+    myEvents.add((Event)myBelt);
     myParameters.add("moveBelt,");
-    myEvents.add(Event(myRobot));
+    myEvents.add((Event)myRobot);
     String robotMove2 = "move," + String.valueOf(originalX) + "," + String.valueOf(originalY);
     myParameters.add(robotMove2);
-    myEvents.add(Event(myRobot));
+    myEvents.add((Event)myRobot);
     myParameters.add("dropShelf,");
     String robotMove3 = "move," + String.valueOf(robotX) + "," + String.valueOf(robotY);
     myParameters.add(robotMove3);
-    myEvents.add(Event(myRobot));
+    myEvents.add((Event)myRobot);
   }
   
   
