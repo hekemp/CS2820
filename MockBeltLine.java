@@ -11,7 +11,7 @@
 import java.util.*;
 
 
-public class MockBelt implements Event{
+public class MockBeltLine implements Event{
 	
    
    int myX;
@@ -20,7 +20,7 @@ public class MockBelt implements Event{
    private ArrayList<Event> myEvents;
   private ArrayList<String> myParameters;
 	
-	public MockBelt(int x, int y, String item){
+	public MockBeltLine(int x, int y, String item){
     myX = x;
     myY = y;
     myItem = item;
@@ -38,13 +38,13 @@ public class MockBelt implements Event{
 	    	{}
 	    else{
 		if(myX != 0)
-			{tempX = myX;
+			{int tempX = myX;
 			myX = myX - 1;
 			System.out.println(item + " moved from: " + String.valueOf(tempX) + " to " + String.valueOf(myX));
 		        myEvents.add((Event) this);
 		        myParameters = " ";}
 		else
-			{tempY = myY;
+			{int tempY = myY;
 			myY = myY - 1;
 			System.out.println(item + " moved from: " + String.valueOf(tempY) + " to " + String.valueOf(myY));
 			myEvents.add((Event) this);
