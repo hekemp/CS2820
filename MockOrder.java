@@ -51,7 +51,7 @@ public class MockOrder implements Event {
   
   public String getPara(){
     if (myParameters.isEmpty()){
-      return " "
+      return " ";
     }
     else{
       return myParameters.remove();
