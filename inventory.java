@@ -34,7 +34,7 @@ public class inventory implements Event{
 			placeitemtoshelf(a);  // This line modified by Xinyu Qian, changed (item x) to (a)
 			currentID++;
 			totalnum++;
-			System.out.println("item with ID"+currentID+"has been added to shelf");
+			//System.out.println("item with ID"+currentID+"has been added to shelf");
 			}
 		System.out.println("Inventory Initialized" );	
 		}
