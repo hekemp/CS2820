@@ -86,13 +86,8 @@ public class Master
 	 */
     public void runSimulation()
     {
-     this.addEvent((Event)myBelt," ");
-     this.addEvent((Event)myFloor, " ");
-     this.addEvent((Event)myInventory," ");
-     this.addEvent((Event)myOrder, " ");
-     this.addEvent((Event)myRobot," ");
-     this.addEvent((Event)myShelf, " ");
-     this.addEvent((Event)myVisualizer," ");
+     this.addEvent((Event) myMockOrder,"recieveOrder");
+     this.addEvent((Event) myMockOrder,"pickUpShelf");
      
      while(!myEvents.isEmpty())
      {Event newEvent = myEvents.remove(0);
