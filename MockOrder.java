@@ -86,7 +86,7 @@ public class MockOrder implements Event {
     myParameters.add("dropShelf,");
     String robotMove3 = "move," + String.valueOf(robotX) + "," + String.valueOf(robotY);
     myParameters.add(robotMove3);
-    myEvents.add(Event(myRobot);
+    myEvents.add(Event(myRobot));
   }
   
   
