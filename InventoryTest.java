@@ -33,7 +33,7 @@ public class InventoryTest {
         	Robot newRobot = new Robot(newFloor,newShelf,2,2,100);
         	inventory newInventory = new inventory(newFloor, newRobot);
 		 
-		Shelf s = I.findItem("pen");
-		assertTrue(s.Item.contains("pen");
+		Shelf s = newInventory.finditem("pen");
+		assertTrue(s.Item.contains("pen"));
 	    }
 	  }
