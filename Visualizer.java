@@ -121,7 +121,7 @@ public class Visualizer implements Event{
         f.setVisible(true);
         try {
             // Let the warehouse fully initialize before continuing
-            sleep(200);
+            sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
