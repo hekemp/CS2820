@@ -15,6 +15,7 @@ public class InventoryTest {
 	   */
 	  @Test
 	  public void test001() {
+		  Floor newFloor = new Floor(6);
 		  Shelf newShelf = new Shelf(new Point(0, 5));
 		  Robot newRobot = new Robot(newFloor,newShelf,2,2,100);
 		  inventory newInventory = new inventory(newFloor, newRobot);
@@ -27,7 +28,7 @@ public class InventoryTest {
 	   */
 	  @Test
 	  public void test002() {
-	
+		Floor newFloor = new Floor(6);
 		Shelf newShelf = new Shelf(new Point(0, 5));
         	Robot newRobot = new Robot(newFloor,newShelf,2,2,100);
         	inventory newInventory = new inventory(newFloor, newRobot);
