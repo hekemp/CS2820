@@ -39,9 +39,11 @@ public class MockRobot {
    }
     public Point TrackRobot(int n){
         robotroute=m.getRoute(m.getCharger(),m.getPicker());
-        move(robotroute.get(n));
+        if (n<robotroute.size()){
+            move(robotroute.get(n));
         
-       return robot;
+       }
+        return robot;
    }
    /**
  * @author zhaoxinglu
