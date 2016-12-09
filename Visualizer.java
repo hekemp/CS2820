@@ -157,11 +157,6 @@ public class Visualizer implements Event{
 	public String getPara(){return "";};
 
     
- /**
- *
- * @author zhaoxinglu
- * main method is used to test code
- */
     
        
     }
@@ -183,10 +178,10 @@ class MyPanel extends JPanel {
  /**
  *
  * @author zhaoxinglu
- * @param m is an interface implemented by the floor class
+ * @param m is an object of the floor class
  * Mypanel can get information of warehouse from it
  * @param b is a object of MockBelt class, Mypanel class can get track of the item on the belt
- * @param r is a object of MockRobot class,Mypanel class can get coordinate of the robot
+ * @param r is a object of Robot class,Mypanel class can get coordinate of the robot
  * all mock class has been written for convinient testing
  */
   
@@ -202,8 +197,8 @@ class MyPanel extends JPanel {
  *
  * @author zhaoxinglu
  * @input Floor, which initialize the instance variable m
- * MyPanel initializer set GUI border to be black
- * also calls setup method 
+ * @input Robot, which initialize the instance variable of robot class r1
+ * 
  */
     
     
@@ -233,7 +228,7 @@ class MyPanel extends JPanel {
 *
 * @author zhaoxinglu
 * @param Graphics
-* paint method temporarily uses mock object and expected return data to draw the warehouse
+* paint method mainly draw the warehouse according to the floor class 
 */
 }
 
