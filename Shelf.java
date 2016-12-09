@@ -8,6 +8,7 @@ import java.util.ArrayList;
 class Shelf{
 	int items = 0;
 	ArrayList<item> Item = new ArrayList<>();
+	Queue<item> toBelt = new LinkedList<item>();    // Send removed items to Picker.
 	int x, y;
 	/**@author yunfjiang
 	 * Point/location 
@@ -38,8 +39,9 @@ class Shelf{
 	}
 	
 	public String removeItems(item I){
-		Item.remove(Item.indexOf(I));
+		Item.remove(Item.indexOf(I));    // melkeurti are those removed items going to picker?
 		items--;
+		toBelt.add(Item.remove(Item.indexOf(I))); // melkeurti send removed items to Belt
 		return String.format("Removed item %1$d %s from shelf", I.itemID, I.type);
 	}
 	
