@@ -15,9 +15,9 @@ public class InventoryTest {
 	   */
 	  @Test
 	  public void test001() {
-		  Floor F = new Floor(7);
-		  Robot i=new Robot(F,0,0,1)
-		inventory I = new inventory(F,i);
+		  Shelf newShelf = new Shelf(new Point(0, 5));
+		  Robot newRobot = new Robot(newFloor,newShelf,2,2,100);
+		  inventory newInventory = new inventory(newFloor, newRobot);
 		
 		assertEquals(totalnum,14);
 
@@ -28,9 +28,9 @@ public class InventoryTest {
 	  @Test
 	  public void test002() {
 	
-		Floor F = new Floor(7);
-		Robot i=new Robot(F,0,0,1)
-		inventory I = new inventory(F,i);
+		Shelf newShelf = new Shelf(new Point(0, 5));
+        	Robot newRobot = new Robot(newFloor,newShelf,2,2,100);
+        	inventory newInventory = new inventory(newFloor, newRobot);
 		 
 		Shelf s = I.findItem("pen");
 		assertTrue(s.Item.contains("pen");
