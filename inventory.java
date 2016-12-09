@@ -22,7 +22,7 @@ public class inventory implements Event{
 	 * @author Yunfan Jiang
 	 * initialize the stock at the beginning
 	 */
-	public void inventory(Floor y, Robot x ){
+	public inventory(Floor y, Robot x ){
 		
 		this.floor=y;
 		this.robot=x;
