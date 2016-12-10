@@ -18,9 +18,9 @@ public class Order{
 	ArrayList<item>orderItemList;
 	
 	public Order(String progress,String address, String dateReceived,int orderNumber, OrderItem[] items){
-		progress=progress;
-		address=address;
-		dateReceived=dateReceived;
+		this.progress=progress;
+		this.address=address;
+		this.dateReceived=dateReceived;
 		this.orderNumber=orderNumber;
 		orderitems=items;
 		this.orderItemList= orderItemList;
