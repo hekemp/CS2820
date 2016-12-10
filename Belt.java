@@ -17,9 +17,7 @@ public class Belt implements Event{
     int size;
     Floor floor;
     Point location;
-    Shelf myShelf;
     Bin bin;
-    Order order;
     item item;
     Queue<item> toBelt;
     PriorityQueue<Event> beltEvents;
@@ -38,19 +36,25 @@ public class Belt implements Event{
     		belt.add(b);
     	}
     }
+    /**
+     * @author Mouna El Keurti
+     * 
+     */
     
     public Bin getBin(){
   	  Bin bin = new Bin();
   	  return bin;
     }
     
+    // Store items to be added in the belt in a Queue
     public Queue<item> gettoBelt(){
 		return toBelt;
 	}
-
+    
+    // Picker get the items that needs to be added in the belt 
     public item getItem(){
     	return toBelt.poll();
-    		
+    			
     }
     
     public Package getPackage(){
@@ -66,6 +70,13 @@ public class Belt implements Event{
 		return new itemBin(getBin(),getItem());
 	}
     
+    /**
+     * @author Mouna El keurti
+     * One picker receives an items, picker add item to the Bin (A bin is removed from first index of belt
+     * replaced with itemBin object) Once an item is added to the head, an other is removed from tail.
+     * If item reaches packer location (size/2), packer remove item and bin and put the packed item back to belt.
+     * If item reaches the end of belt location, an item is sent to dock location.
+     */
     public void moveBelt(){
     	belt.set(0, getItemBin());
     	belt.removeLast();
@@ -84,6 +95,7 @@ public class Belt implements Event{
     		
     	}
     	moving = true;
+    	
     }
     
     public void doPackage(){
@@ -97,7 +109,12 @@ public class Belt implements Event{
     	
     }
     
-    
+    /**
+     * 
+     * @author Mouna El keurti 
+     * A class that put a received a item in a bin and make it as a new object
+     *
+     */
    
     public class itemBin{
     	
@@ -118,6 +135,13 @@ public class Belt implements Event{
     	}
     	
     }
+    
+    /**
+     * 
+     * @author Mouna E keurti 
+     * A class that pack the items and create a new object (packaged item)
+     *
+     */
     
     public class itemPackage{
     	item item;
@@ -173,6 +197,6 @@ public class Belt implements Event{
 		}
 	}
      
-
+	
    
 }
