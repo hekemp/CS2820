@@ -11,14 +11,16 @@
 public class Production
 {
     public static void main(String[] args){
-        Floor newFloor = new Floor(6);
+        Floor newFloor = new Floor(6);/** @Xinglu Zhao 
+         *Here the floor size is better equal to or greater than 7 because of some floor settings,eg.shelfs 
+         */
         //Belt newBelt = new Belt(newFloor);
        // Order newOrder = new Order();
         Shelf newShelf = new Shelf(new Point(0, 5));
         Robot newRobot = new Robot(newFloor,newShelf,2,2,100);
         inventory newInventory = new inventory(newFloor, newRobot);
         MockOrder newMockOrder = new MockOrder(newRobot, newInventory, newFloor);
-       /// Visualizer newVisualizer = new Visualizer();
+       /// Visualizer newVisualizer = new Visualizer();// Here Visualizer initilizer needs Floor and Robot
         
         Master myMaster = new Master();
        // myMaster.addBelt(newBelt);
