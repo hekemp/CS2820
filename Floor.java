@@ -83,7 +83,7 @@ public class Floor implements viewFloor,robotPath, Event {
      * @return the ArrayList of points from p1 to p2
      */
 	public ArrayList<Point> getRoute(Point p1, Point p2){
-		route = new ArrayList<>();
+	route = new ArrayList<>();
         int move = Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);
         for(int i=0; i< move-1;i++){
             if(p1.x - p2.x > 1){
@@ -112,6 +112,16 @@ public class Floor implements viewFloor,robotPath, Event {
         route.add(p2);
         return route;
 	}
+	/**  
+	simple test for getRoute method
+	public static void main(String[] args){
+		Floor F = new Floor();
+		System.out.println(F.getRoute(F.getCharger(), F.getPacker()));
+		System.out.println(F.getRoute(F.getPicker(), F.getCharger()));
+		System.out.println(F.getRoute(F.getPicker(), F.getPacker()));
+	}
+	*/
+	
 	@Override
 	public Event getEvent(){
 		return (Event)this;
