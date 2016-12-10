@@ -35,7 +35,7 @@ public class Visualizer implements Event{
    Floor x=new Floor(7);
    int count=0;
    Robot m;
-   MockBelt b=new MockBelt();
+   MockBelt b=new MockBelt(x);
    MyPanel mypanel1;
     JFrame f = new JFrame("Warehouse");
    
@@ -171,7 +171,7 @@ public class Visualizer implements Event{
 class MyPanel extends JPanel {
     
     Floor m;
-    MockBelt b=new MockBelt();
+    MockBelt b=new MockBelt(m);
     Robot r1;
     
        
@@ -222,7 +222,7 @@ class MyPanel extends JPanel {
          g.setColor(Color.cyan);
        g.drawOval(r1.getLocation().x*20+13, r1.getLocation().y*20+13, 15, 15);//robot
        g.setColor(Color.GRAY);
-       g.drawRect(b.TrackItem().x*20+10, b.TrackItem().y*20+10, 20, 20);//item
+       g.drawRect(b.item.x*20+10, b.item.y*20+10, 20, 20);//item
        
   }
     /*
