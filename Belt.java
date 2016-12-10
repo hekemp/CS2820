@@ -8,7 +8,7 @@ import java.util.*;
  * 
  * Belt class moves bins in the belt from picker to packer.
  * At packer location, the belt is stopped and a packer grab a package
- * and add it to the belt and goes to the shipping dock.
+ * and adds it to the belt and goes to the shipping dock.
  */
 
 public class Belt implements Event{
@@ -21,11 +21,11 @@ public class Belt implements Event{
     item item;
     Queue<item> toBelt;
     PriorityQueue<Event> beltEvents;
-	PriorityQueue<String> beltParameters;
+    PriorityQueue<String> beltParameters;
     
     
     LinkedList belt = new LinkedList();
-    ArrayList<Object> Dock = new 	ArrayList<Object>();
+    ArrayList<Object> Dock = new ArrayList<Object>();
     
     public Belt(Floor f){
     	this.floor = f;
