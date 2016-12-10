@@ -121,7 +121,7 @@ public class Visualizer implements Event{
         f.setVisible(true);
         try {
             // Let the warehouse fully initialize before continuing
-            sleep(2000);
+            sleep(300);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -203,11 +203,12 @@ class MyPanel extends JPanel {
     
     
     public void paintComponent(Graphics g) {
-       ArrayList<Point> sf=m.getShelf();
+       
        g.drawRect(10,10,m.floorSize()*20,m.floorSize()*20);//warehouse 
        g.drawRect(10, 10, 20, (m.getBelt().size()-1)*20);//belt
-       for(int i=0;i<m.getShelf().size();i++){
-          g.drawRect(sf.get(i).x*20+10, sf.get(i).y*20+10, 20, 20);}//shelf
+        for(int i=0;i<m.shelf.length;i++){
+          g.drawRect(m.shelf[i].x*20+10, m.shelf[i].y*20+10, 20, 20);}//shelf
+      
       
        g.setColor(Color.green);
        g.drawLine(m.getReceving().x*20+10,m.getReceving().y*20+10,m.getReceving().x*20+30,m.getReceving().y*20+10);//draw for receiving dock
